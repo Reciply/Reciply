@@ -1,26 +1,22 @@
 
 import React from "react";
 import { hot } from 'react-hot-loader/root';
-import { Route, Switch } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
+import HomePage from './pages/homepage/HomePage'
 // import './App.css';
 
 function App(){
   return(
-    <div>
+    <Router>
       <Switch>
-        <Route
-          path="/"
-          render={() => <div>HomePage</div>}
-        />
-        <Route
-          path="/products"
-          render={() => <div>ProductsPage</div>}
-        />
-        <Route path="/">
-          test
+        <Route exact path="/">
+          <HomePage />
+        </Route>
+        <Route path="/products">
+          Product Page
         </Route>
       </Switch>
-    </div>
+    </Router>
   )
 }
 
