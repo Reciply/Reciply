@@ -1,0 +1,13 @@
+@import './styles/typography.css';
+@import './styles/colors.css';
+
+html{
+  background-color: #fff;
+}
+
+
+#app{
+  width: 100vw;
+  height: 100vh;
+}
+

@@ -1,0 +1,67 @@
+#root {
+  --base-text-size: 1rem;
+}
+
+* {
+  margin: 0
+}
+
+body {
+  font-size: $base-text-size;
+  font-family: $font-primary;
+  font-weight: 400;
+  color: black;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* text size */
+h1, .text--h1 {
+  font-size: var(--base-text-size);
+  line-height: 1.5rem;
+  font-family: "Open Sans";
+  letter-spacing: 3rem;
+}
+
+h2, .text--h2 {
+ 
+}
+
+h3, .text--h3 {
+
+}
+
+h4, .text--h4 {
+
+}
+
+h5, .text--h5 {
+
+}
+
+h6 {
+}
+
+p {
+
+}
+
+.text--btn {
+
+}
+
+.text--sub1 {
+
+}
+
+.text--sub2 {
+
+}
+
+.text--disabled {
+
+}
+
+.text--code {
+  
+}

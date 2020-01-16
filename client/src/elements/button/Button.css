@@ -1,0 +1,20 @@
+.default{
+  border: none;
+  outline: none;
+  width: 7.5rem;
+  height: 2.5rem;
+  padding: 0 .75rem;
+  border-radius: 6px;
+  transition: ease-in-out .4s;
+  cursor: pointer;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+
+  background-color: rgb(67, 176, 42);
+  border: 2px solid rgb(67, 176, 42);
+  color: white;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, .25);
+}

@@ -1,0 +1,10 @@
+/* .outer{
+  background-color: red;
+} */
+
+.loginForm{
+  width: 30%;
+  display: flex;
+  flex-flow: column;
+}
+
