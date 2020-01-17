@@ -19,8 +19,16 @@
         "sourceType": "module"
     },
     "plugins": [
-        "react"
+        "react",
+        "class-property"
     ],
     "rules": {
+        "no-trailing-whitespace": true,
+        "semi": ["error", "never"],
+        "rest-spread-spacing": "warn",
+        "prefer-spread": "warn",
+        "react/jsx-props-no-spreading": "off",
+        "arrow-parens": "off",
+        "camelcase": "off"
     }
 }
