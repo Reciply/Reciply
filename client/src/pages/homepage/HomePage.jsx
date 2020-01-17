@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 
-import Button from '../../elements/button'
-import TextField from '../../elements/textfield'
+import LoginModal from '../../molecules/login-modal'
 
 import styles from './HomePage.css'
 
@@ -17,11 +16,10 @@ class HomePage extends Component{
   render(){
     return(
       <div className={styles.outer}>
-        <form className={styles.loginForm}>
-          <TextField type="email" placeholder="Email"/>
-          <TextField type="password"/>
-          <Button>Login</Button>
-        </form> 
+        <div>Navbar</div>
+        <div>
+          <LoginModal/>
+        </div>
       </div>
     )
   }
