@@ -12,11 +12,10 @@ class TextField extends Component{
     }
   }
 
-  // handleChange = (e) => {
-  //   const { onChange } = this.props
-  //   const { err } = this.state
-  //   onChange(e.target.value)
-  // }
+  handleChange = (e) => {
+    const { onChange } = this.props
+    onChange(e.target.value)
+  }
 
   render() {
     const {
