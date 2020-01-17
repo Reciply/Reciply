@@ -1,0 +1,54 @@
+import React, { Component } from 'react'
+
+import Button from '../../elements/button'
+import TextField from '../../elements/textfield'
+
+import styles from './LoginModal.css'
+
+class LoginModal extends Component{
+
+  constructor(props){
+    super(props);
+    this.state = {
+      loginEmail: '',
+      loginPassword: ''
+    }
+  }
+
+  handleChange = (name, value) =>{
+    this.setState({
+      [name]: value,
+    })
+  } 
+
+  render(){
+    const { 
+      loginEmail,
+      loginPassword
+    } = this.state
+    return(
+      <div className={styles.modal}>
+        <form className={styles.loginForm}>
+          <TextField
+            name="loginEmail"
+            type="email"
+            placeholder="Email"
+            value={loginEmail}
+            onChange={value => this.handleChange('loginEmail', value)}
+          />    
+          <TextField 
+            name="loginPassword"
+            type="password"
+            placeholder="Password"
+            value={loginPassword}
+            onChange={value => this.handleChange('loginPassword', value)}
+          />
+
+          <Button className={styles.loginBtn}>Login</Button>
+        </form> 
+      </div>
+    )
+  }
+}
+
+export default LoginModal
