@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 
 import LoginModal from '../../molecules/login-modal'
+import HomePageImage from '../../assets/homepage_image.png'
 
 import styles from './HomePage.css'
 
@@ -20,6 +21,7 @@ class HomePage extends Component{
         <div>
           <LoginModal/>
         </div>
+        <img src={HomePageImage}/>
       </div>
     )
   }
