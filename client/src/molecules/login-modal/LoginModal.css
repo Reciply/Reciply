@@ -1,10 +1,7 @@
-
 .modal{
-  width: 40%;
-  height: 50%;
+  width: 33.75rem;
   margin: 0 auto;
 }
-
 
 .loginForm{
   display: flex;

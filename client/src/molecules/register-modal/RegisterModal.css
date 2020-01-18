@@ -1,0 +1,15 @@
+
+.modal{
+  width: 33.75rem;
+  margin: 0 auto;
+  border: 0.1rem solid black;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.modal > p{
+  text-align: center;
+}
