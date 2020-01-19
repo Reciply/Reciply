@@ -32,16 +32,15 @@ class HomePage extends Component{
       homePageModal = <LoginModal/>
     } 
     
-    //TODO: 2500
+    //TODO: Remember to do validation
     return(
       <div className={styles.outer}>
-        <div>
+        <div className={styles.modalContainer}>
           <header>
             <Button className={styles.loginBtn}>Login</Button> 
           </header>
           {/* <Button>Login</Button> */}
           {homePageModal}
-        <img src={HomePageImage}/>
         </div>
       </div>
     )

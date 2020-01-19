@@ -1,6 +1,24 @@
-/* .outer{
-  background-color: red;
-} */
+.outer{
+  width: 100vw;
+  height: 100vh;
+}
+
+
+
+.modalContainer{
+  width: 100vw;
+  height: 70vh;
+  background: url('../../assets/homepage_image.png') no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+.modalContainer > header{
+  padding: 1rem 4rem;
+  display: flex;
+  justify-content: right;
+}
+
 .homePageModal{
   width: 33.75rem;
 }
