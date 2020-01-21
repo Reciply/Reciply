@@ -49,7 +49,8 @@ router.post('/checkPostcode', function(req, res){
   //TODO: Add a list of post codes to check from
   
   //TODO: Do a number check
-  if (req.body.postCode === 2500){
+  console.log(req.body);
+  if (req.body.postCode === '2500'){
     res.send({"status": 200, "isValid": true})
   } else {
     res.send({"status": 200, "isValid": false})
