@@ -1,12 +1,61 @@
+var models  = require('../models');
 var express = require('express');
-var router = express.Router();
+var router  = express.Router();
 
-/* GET users listing. */
-router.get('/', function(req, res, next) {
-  res.locals.connection.query('SELECT * from users', function (error, results, fields) {
-		if (error) throw error;
-		res.send(JSON.stringify({"status": 200, "error": null, "response": results}));
-	});
+cors = require("cors");
+
+
+router.use(cors())
+
+//TODO: delete this. this is just for testing
+router.get('/', function(req, res) {
+  models.Users.findAll()
+  .then(function(users) {
+    res.status(200).json({
+      users: users
+    });
+  })
+  .catch(err => {
+    res.err({"errorMessage": err })
+  });
 });
 
-module.exports = router;
+//TODO: Register
+router.post('/register', function(req, res){
+  const userData = { 
+    email: req.body.email,
+    password: req.body.password
+  }
+
+  models.Users.findOne({
+    where: {
+      email: req.body.email
+    }
+  })
+  .then(user => {
+    if (!user) {
+      console.log("User created")
+      models.Users.create(userData)
+      .then(
+        res.send({"status": 200, message: "User created"})
+      )
+    } else {
+      console.log("This email has been blacklisted or not activated. Try another email.")
+    }
+  })
+})
+
+router.post('/checkPostcode', function(req, res){
+  //TODO: Add a list of post codes to check from
+  
+  //TODO: Do a number check
+  if (req.body.postCode === 2500){
+    res.send({"status": 200, "isValid": true})
+  } else {
+    res.send({"status": 200, "isValid": false})
+  }
+})
+
+//TODO: Login
+
+module.exports = router
