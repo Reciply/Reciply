@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 import TextField from '../../elements/textfield'
 import Button from '../../elements/button'
 
-import { checkPostCode, register } from '../../api/AuthenticationHelper'
+import { checkPostCode, register, login } from '../../api/AuthenticationHelper'
 
 import styles from './RegisterModal.css'
 
@@ -22,6 +22,21 @@ class RegisterModal extends Component{
     })
   }
 
+  handlePostCodeCheck = () => {
+    console.log("this works")
+    const { postCode } = this.state
+
+    const promise = new Promise((resolve, reject) => {
+      checkPostCode(postCode, resolve, reject)
+    })
+    .then(res => {
+      console.log(res)
+    })
+    .catch(err => {
+      console.log(err)
+    })
+  }
+
 
   render(){
     const { postCode } = this.state
@@ -37,7 +52,7 @@ class RegisterModal extends Component{
         />
         <Button 
           className={styles.cntnBtn}
-          onClick={this.checkPostCode}
+          onClick={this.handlePostCodeCheck}
         >
           Continue
         </Button> 

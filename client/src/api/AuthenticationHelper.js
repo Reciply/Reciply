@@ -31,23 +31,24 @@ export const login = async (values, resolve, reject) => {
  * @param {func} reject - an async promise function
  */
 export const checkPostCode = async (postCode, resolve, reject) => {
-  fetch(`localhost:3000/postCode`, {
+  fetch(`http://localhost:4000/postCode`, {
     method: 'POST',
-    mode: 'cors',
-    credentials: 'include',
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({'postCode': postCode}),
+    body: JSON.stringify({'postCode': '2500'}),
   })
     .then((res) => {
-      if (res.status === 200) {
-        resolve(res.json())
-      } else if (res.status === 404 || res.status === 403) {
-        res.json().then(object => reject(object.message))
-      }
+      console.log("does this work")
+      console.log(res)
+      resolve(res.json())
+      // if (res.status === 200) {
+      //   resolve(res.json())
+      // } else if (res.status === 404 || res.status === 403) {
+      //   res.json().then(object => reject(object.message))
+      // }
     })
-    .catch((err) => console.log(error))
+    .catch((err) => console.log(err))
 }
 /**
  * 
