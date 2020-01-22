@@ -8,17 +8,7 @@ cors = require("cors");
 router.use(cors())
 
 //TODO: delete this. this is just for testing
-router.get('/', function(req, res) {
-  models.Users.findAll()
-  .then(function(users) {
-    res.status(200).json({
-      users: users
-    });
-  })
-  .catch(err => {
-    res.err({"errorMessage": err })
-  });
-});
+
 
 //TODO: Register
 router.post('/register', function(req, res){
