@@ -1,10 +1,8 @@
 import React, { Component } from 'react'
 
-import LoginModal from '../../molecules/login-modal'
-import RegisterModal from '../../molecules/register-modal'
+import HomePageModal  from '../../molecules/homepage-modal'
+import RegisterModal from '../../molecules/homepage-modal/RegisterModal'
 import Button from '../../elements/button'
-
-import HomePageImage from '../../assets/homepage_image.png'
 
 import styles from './HomePage.css'
 
@@ -14,33 +12,30 @@ class HomePage extends Component{
     this.state = {
       showLogin: false, //true is register and false is login 
       email: '',
-      password:'',
+      password:'',  
     }   
   }
 
-  loginBtn = {
-
+  handleLoginBtn = () => {
+    this.setState({
+      showLogin: true
+    })
   }
 
-  render(){
 
-    // Show RegisterModal by default
-    const {showLogin} = this.state
-    let homePageModal =  <RegisterModal/>
-    
-    if (showLogin){
-      homePageModal = <LoginModal/>
-    } 
-    
+
+  render(){    
     //TODO: Remember to do validation
+
+    const { showLogin } = this.state
     return(
       <div className={styles.outer}>
         <div className={styles.modalContainer}>
           <header>
-            <Button className={styles.loginBtn}>Login</Button> 
+            <Button onClick={this.handleLoginBtn} className={styles.loginBtn}>Login</Button> 
           </header>
-          {/* <Button>Login</Button> */}
-          {homePageModal}
+          <HomePageModal showLogin={showLogin}/>
+          {/* <RegisterModal/> */}
         </div>
       </div>
     )

@@ -7,6 +7,7 @@
   flex-direction: column;
   padding: 1.5rem 5rem; 
   box-shadow: rgb(136, 136, 136) 2px 1px 20px;
+  /* align-items: center; */
 }
 
 .modal > h4, p{
@@ -19,4 +20,20 @@
   margin-top: 1.5rem;
   margin-bottom: 1.5rem;
   width: 100%;
+}
+
+.modal > .regForm{
+  height: 10rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.regForm > .regEmail{
+  margin-bottom: 1.5rem;
+}
+
+.regForm > .regPwd{
+  margin-bottom: 2rem;
 }
