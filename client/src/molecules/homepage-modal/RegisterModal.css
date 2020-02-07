@@ -23,7 +23,6 @@
 }
 
 .modal > .regForm{
-  height: 10rem;
   display: flex;
   flex-direction: column;
   align-items: center;
