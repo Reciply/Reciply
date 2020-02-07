@@ -19,18 +19,19 @@ class ProductCard extends Component{
       productName,
       productPrice,
       cupString,
-      addToCard, 
+      image,
+      addToCart, 
     } = this.props
 
     return(
       <div className={styles.card}>
-        <img src="https://cdn0.woolworths.media/content/wowproductimages/small/144803.jpg"/>
+        <img src={image}/>
 
         <p className={styles.name}>{productName}</p>
 
-        <h3>{productPrice}</h3>
+        <h3>${productPrice || '0.00'}</h3>
 
-        <Button className={styles.addToCart} onClick={this.handleAddToCard}>>Add to cart</Button>
+        <Button className={styles.addToCart} onClick={this.handleAddToCard}>Add to cart</Button>
       </div>
     )
   }

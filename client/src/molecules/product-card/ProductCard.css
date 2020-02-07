@@ -16,4 +16,5 @@
 
 .card > .addToCart{
   width: 100%;
+  align-self: flex-end;
 }
