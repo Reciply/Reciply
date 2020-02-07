@@ -35,7 +35,6 @@ class HomePage extends Component{
             <Button onClick={this.handleLoginBtn} className={styles.loginBtn}>Login</Button> 
           </header>
           <HomePageModal showLogin={showLogin}/>
-          {/* <RegisterModal/> */}
         </div>
       </div>
     )
