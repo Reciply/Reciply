@@ -1,9 +1,10 @@
 import {
-  GET_PRODUCTS
+  GET_PRODUCTS,
+  SEARCH_PRODUCTS
 } from './types'
 
 export const getProducts = params => (dispatch) => {
-  console.log('[DEBUG] : GET products')
+  //TODO: add item
   const {
     categoryId = '1-E5BEE36E',
     pageNumber = 1,
@@ -20,28 +21,41 @@ export const getProducts = params => (dispatch) => {
   })
     .then((res) => {
       if (res.status === 200) {
-        let items = []
+        let payload = {
+          totalPages: 0,
+          currPage: 0,
+          items: []
+        }
 
         res.json().then(object =>{
+          payload.totalPages = Math.ceil(object.TotalRecordCount/pageSize)
+          payload.currPage = pageNumber
           object.Bundles.forEach(bundle =>{
             bundle.Products.forEach(product => {
               let item = {
                 name: product.Name,
-                price: product.Price,
+                price: (product.Price * 1.15).toFixed(2),
                 image: product.SmallImageFile,
               }
-              items.push(item)
+              payload.items.push(item)
             })
           })
+
+          console.log(payload)
           dispatch({
             type: GET_PRODUCTS,
             status: 'success',
-            payload: items
+            payload: payload
           })
         })
       } else if (res.status === 404 || res.status === 403) {
-        // res.json().then(object => reject(object.message))
+        res.json().then(object => reject(object.message))
       }
     })
     .catch((err) => console.log(err))
+}
+
+export const searchProducts = params => (dispatch) => {
+  
+  const WoolworthsAPI = "https://www.woolworths.com.au/apis/ui/Search/products" 
 }

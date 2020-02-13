@@ -29,7 +29,10 @@ class ProductCard extends Component{
 
         <p className={styles.name}>{productName}</p>
 
-        <h3>${productPrice || '0.00'}</h3>
+        <div className={styles.price}>
+          <h3>${productPrice || '0.00'}</h3>
+          <p>fweiw</p>
+        </div>
 
         <Button className={styles.addToCart} onClick={this.handleAddToCard}>Add to cart</Button>
       </div>
