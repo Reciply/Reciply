@@ -1,22 +1,23 @@
 import {
   GET_PRODUCTS,
-  SEARCH_PRODUCTS
+  SEARCH_PRODUCTS,
+  GET_CATEGORIES
 } from './types'
 
 export const getProducts = params => (dispatch) => {
   //TODO: add item
   const {
-    categoryId = '1-E5BEE36E',
-    pageNumber = 1,
-    pageSize = 24, 
-    url = '/shop/browse/fruit-veg',
-    formatObject = 'Fruit %26 Veg', 
+    categoryId,
+    pageNumber,
+    pageSize, 
+    UrlFriendlyName,
+    formatObject, 
   } = params 
 
   const WoolworthsAPI = "https://www.woolworths.com.au/apis/ui/browse/category" 
 
   // `${WoolworthsAPI}?categoryId=${categoryId}&pageNumber=${pageNumber}&pageSize=${pageSize}&sortType=TraderRelevance&url=${url}&formatObject={"name":"${formatObject}"}`
-  fetch(`${WoolworthsAPI}?categoryId=${categoryId}&pageNumber=${pageNumber}&pageSize=${pageSize}&sortType=TraderRelevance&url=${url}&formatObject={"name":"${formatObject}"}`, {
+  fetch(`${WoolworthsAPI}?categoryId=${categoryId}&pageNumber=${pageNumber}&pageSize=${pageSize}&sortType=TraderRelevance&url=/shop/browse/${UrlFriendlyName}&formatObject={"name":"${escape(formatObject)}"}`, {
     method: 'POST',
   })
     .then((res) => {
@@ -32,9 +33,11 @@ export const getProducts = params => (dispatch) => {
           payload.currPage = pageNumber
           object.Bundles.forEach(bundle =>{
             bundle.Products.forEach(product => {
-              let item = {
-                name: product.Name,
+              const item = {
+                name: product.Description.replace('<br>', ' '),
                 price: (product.Price * 1.15).toFixed(2),
+                cupString: product.CupString,
+                isAvailable: product.IsAvailable,
                 image: product.SmallImageFile,
               }
               payload.items.push(item)
@@ -55,7 +58,97 @@ export const getProducts = params => (dispatch) => {
     .catch((err) => console.log(err))
 }
 
+// body: JSON.stringify({
+//   SearchTerm: 'Apple',
+//   PageSize: 1,
+//   PageNumber: 24,
+//   SortType: 'TraderRelevance',
+//   Location: '/shop/search/products?searchTerm=Apple',
+//   Passes: 27
+// })
+
+// body: JSON.stringify({
+//   SearchTerm: 'Apple',
+//   PageSize: '1',
+//   PageNumber: '24',
+//   SortType: 'TraderRelevance',
+//   Location: '/shop/search/products?searchTerm=Apple',
+//   Passes: '27'
+// }),
+
 export const searchProducts = params => (dispatch) => {
-  
-  const WoolworthsAPI = "https://www.woolworths.com.au/apis/ui/Search/products" 
+  const {
+    search,
+    pageNumber,
+    pageSize,
+  } = params
+  console.log('[DEBUG]: SearchProducts')
+
+  const WoolworthsSearchApi = "https://www.woolworths.com.au/apis/ui/Search/products"
+
+  fetch(`${WoolworthsSearchApi}?SearchTerm=${search}&PageSize=${pageSize}&PageNumber=${pageNumber}&SortType=TraderRelevance&Location=/shop/search/products?searchTerm=${search}&Passes=27`, {
+    method: 'POST'
+  })
+  .then((res) => {
+    let payload = {
+      totalPages: 0,
+      currPage: 0,
+      items: []
+    }
+    res.json().then(object =>{
+      payload.totalPages = Math.ceil(object.SearchResultsCount/pageSize)
+      payload.currPage = pageNumber
+      object.Products.forEach(bundle =>{
+        bundle.Products.forEach(product => {
+          const item = {
+            name: product.Description.replace('<br>', ' '),
+            price: (product.Price * 1.15).toFixed(2),
+            cupString: product.CupString,
+            isAvailable: product.IsAvailable,
+            image: product.SmallImageFile,
+          }
+          payload.items.push(item)
+        })
+      })
+
+      console.log(payload)
+      dispatch({
+        type: SEARCH_PRODUCTS,
+        status: 'success',
+        payload: payload
+      })
+    })
+  })
+  .catch((err) => {
+    console.log('Error')
+    console.log(err)
+  })
+}
+
+export const getCategories = params => (dispatch) => {
+  fetch('https://www.woolworths.com.au/apis/ui/PiesCategoriesWithSpecials',
+    {method: 'GET'}
+  )
+  .then((res) => {
+    if (res.status === 200) {
+      let sortedCategories = [] 
+      res.json().then(body => {
+        body.Categories.map((category, index) => {
+          if(category.NodeId !== "specialsgroup"){
+            sortedCategories.push({
+              NodeId: category.NodeId,
+              Name: category.Description,
+              UrlFriendlyName: category.UrlFriendlyName
+            })
+          }
+        })
+
+        dispatch({
+          type: GET_CATEGORIES,
+          status: 'success',
+          payload: sortedCategories
+        })
+      })
+    }
+  })
 }
