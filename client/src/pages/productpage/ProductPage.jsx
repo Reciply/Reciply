@@ -4,9 +4,9 @@ import { connect } from 'react-redux'
 import {
   getProducts
 } from '../../state/ducks/products/actions'
-import { ArrowLeft, ArrowRight } from 'react-feather'
 
-import ProductCard from '../../molecules/product-card'
+import ProductList from '../../molecules/product-list'
+import ProductController from '../../molecules/product-controller'
 
 import styles from './ProductPage.css'
 
@@ -14,34 +14,36 @@ class ProductPage extends Component{
   constructor(props){
     super(props)
     this.state = {
-      searchText: '',
+      search: '',
       categoryId: '1-E5BEE36E',
       pageNumber: 1,
       pageSize: 24,
       url: '/shop/browse/fruit-veg',
-      formatObject: 'Fruit %26 Veg' 
+      formatObject: 'Fruit %26 Veg',
+      search: '',
     }
   }
 
-  componentDidMount(){
-    const {
-      categoryId,
-      pageNumber,
-      pageSize,
-      url,
-      formatObject
-    } = this.state
-    const { products, getProductsConnect } = this.props
-    getProductsConnect({
-      categoryId : categoryId,
-      pageNumber : pageNumber,
-      pageSize : pageSize, 
-      url : url,
-      formatObject : formatObject
-    })
-  }
+  // componentDidMount(){
+  //   const {
+  //     search,
+  //     categoryId,
+  //     pageNumber,
+  //     pageSize,
+  //     url,
+  //     formatObject
+  //   } = this.state
+  //   const { getProductsConnect } = this.props
+  //   getProductsConnect({
+  //     categoryId : categoryId,
+  //     pageNumber : pageNumber,
+  //     pageSize : pageSize, 
+  //     url : url,
+  //     formatObject : formatObject
+  //   })
+  // }
 
-  fetchPage = (e) => {
+  fetchCategoryPage = (e) => {
     const { getProductsConnect } = this.props
     const {
       categoryId,
@@ -50,11 +52,7 @@ class ProductPage extends Component{
       url,
       formatObject
     } = this.state
-
-    console.log(e.target.value)
-
     const pageNum = e.target.value
-
     const promise = new Promise((resolve, reject) => {
       getProductsConnect({
       categoryId : categoryId,
@@ -70,41 +68,46 @@ class ProductPage extends Component{
     .catch((res) => {
       console.log("something went wrong with turning the page")
     })
-
     this.setState({
       pageNumber: pageNum
     })
-   
   }
+
+  handleChange = (name, value) =>{
+    this.setState({
+      [name]: value
+    })
+  } 
   
   render(){
-    const { productsList, totalPages, currPage } = this.props 
+    const { 
+      search 
+    } = this.state
+    const {
+      productsList,
+      totalPages,
+      currPage
+    } = this.props 
 
     let pageList = []
     for (var pageNumber = 1; pageNumber < totalPages+1; pageNumber++){
       if (pageNumber === currPage){
         pageList.push(<h2>{pageNumber}</h2>)
-      } else {
-        pageList.push(<button value={pageNumber} onClick={(e) => this.fetchPage(e)}>{pageNumber}</button>)
+      } else if(!search){
+        pageList.push(<button value={pageNumber} onClick={(e) => this.fetchCategoryPage(e)}>{pageNumber}</button>)
+      } else if(search) {
+        pageList.push(<button value={pageNumber} onClick={(e) => this.fetchSearch(e)}>{pageNumber}</button> )
       }
     }
 
 
     return(
       <div className={styles.page}>
-        <h1>Products that you searched for</h1>
-        <h1>Fruit and Veg</h1>
-        <div className={styles.products}>
-         {productsList.map((value, index) => {
-            return <ProductCard key={index} productName={value.name} image={value.image} productPrice={value.price}/> 
-         })}
-        </div>
-
-        <div className={styles.pagination}>
-          <ArrowLeft/>
-          {pageList}     
-          <ArrowRight/>
-        </div>
+        <ProductController/>
+        <ProductList
+          searchText
+          categoryId
+        /> 
       </div>
     )
   }
