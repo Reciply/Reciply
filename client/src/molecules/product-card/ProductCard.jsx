@@ -20,7 +20,8 @@ class ProductCard extends Component{
       productPrice,
       cupString,
       image,
-      addToCart, 
+      isAvailable,
+      addToCart,
     } = this.props
 
     return(
@@ -28,13 +29,17 @@ class ProductCard extends Component{
         <img src={image}/>
 
         <p className={styles.name}>{productName}</p>
+          {
+            isAvailable ? (
+            <div className={styles.price}>
+              <h3>${productPrice || '0.00'}</h3>
+              <p>{cupString}</p>
+            </div>
+            ) :
+            (<h3> Product not available </h3>)
+          }
 
-        <div className={styles.price}>
-          <h3>${productPrice || '0.00'}</h3>
-          <p>fweiw</p>
-        </div>
-
-        <Button className={styles.addToCart} onClick={this.handleAddToCard}>Add to cart</Button>
+        <Button isDisabled={!isAvailable} className={styles.addToCart} onClick={this.handleAddToCard}>Add to cart</Button>
       </div>
     )
   }
