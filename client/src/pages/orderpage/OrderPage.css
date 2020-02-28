@@ -1,0 +1,39 @@
+.topBar{
+  width: 100%;
+  background-color: #f2f2f2;
+  height: 3.75rem;
+}
+
+.deliveryForm{
+  background-color: #f2f2f2;
+  float: left;
+  width: 45rem;
+  margin: 5rem 5rem 5rem 10rem;
+  padding: 2rem 1rem;
+  display: flex;
+  flex-flow: column;
+}
+
+.deliveryForm > div{
+  margin-bottom: 3rem; 
+}
+
+.deliveryForm > div > h3{
+  margin-bottom: 1.5rem;
+}
+
+.orderSummary{
+  width: 20rem;
+  padding: 2rem 1rem;
+  float: left;
+  margin: 5rem 5rem 10rem 0rem;
+  background-color: #f2f2f2;
+}
+
+.orderSummary .confirm{
+  width: 100%;
+}
+
+.sectIcon{
+  width: 1.5rem;
+}
