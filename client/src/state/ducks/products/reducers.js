@@ -7,6 +7,8 @@ import {
 const initialState = {
   totalPages: 0,
   currPage: 0,
+  searchFor: '',
+  byCategory: '',
   categories: [],
   productsList: [],
 }
@@ -18,7 +20,9 @@ const reducer = (state = initialState, action) => {
         ...state,
         totalPages: action.payload.totalPages,
         currPage: action.payload.currPage,
-        productsList: action.payload.items
+        productsList: action.payload.items,
+        byCategory: action.payload.category,
+        searchFor: '',
       }
     }
     case GET_CATEGORIES:{
@@ -33,7 +37,9 @@ const reducer = (state = initialState, action) => {
         ...state,
         totalPages: action.payload.totalPage,
         currPage: action.payload.currPage,
-        productsList: action.payload.items
+        productsList: action.payload.items,
+        byCategory: '',
+        searchFor: action.payload.search
       }
     }
     default: 

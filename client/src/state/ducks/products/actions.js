@@ -11,18 +11,19 @@ export const getProducts = params => (dispatch) => {
     pageNumber,
     pageSize, 
     UrlFriendlyName,
-    formatObject, 
+    categoryName, 
   } = params 
 
   const WoolworthsAPI = "https://www.woolworths.com.au/apis/ui/browse/category" 
 
   // `${WoolworthsAPI}?categoryId=${categoryId}&pageNumber=${pageNumber}&pageSize=${pageSize}&sortType=TraderRelevance&url=${url}&formatObject={"name":"${formatObject}"}`
-  fetch(`${WoolworthsAPI}?categoryId=${categoryId}&pageNumber=${pageNumber}&pageSize=${pageSize}&sortType=TraderRelevance&url=/shop/browse/${UrlFriendlyName}&formatObject={"name":"${escape(formatObject)}"}`, {
+  fetch(`${WoolworthsAPI}?categoryId=${categoryId}&pageNumber=${pageNumber}&pageSize=${pageSize}&sortType=TraderRelevance&url=/shop/browse/${UrlFriendlyName}&formatObject={"name":"${escape(categoryName)}"}`, {
     method: 'POST',
   })
     .then((res) => {
       if (res.status === 200) {
         let payload = {
+          category: categoryName,
           totalPages: 0,
           currPage: 0,
           items: []
@@ -58,29 +59,13 @@ export const getProducts = params => (dispatch) => {
     .catch((err) => console.log(err))
 }
 
-// body: JSON.stringify({
-//   SearchTerm: 'Apple',
-//   PageSize: 1,
-//   PageNumber: 24,
-//   SortType: 'TraderRelevance',
-//   Location: '/shop/search/products?searchTerm=Apple',
-//   Passes: 27
-// })
-
-// body: JSON.stringify({
-//   SearchTerm: 'Apple',
-//   PageSize: '1',
-//   PageNumber: '24',
-//   SortType: 'TraderRelevance',
-//   Location: '/shop/search/products?searchTerm=Apple',
-//   Passes: '27'
-// }),
-
 export const searchProducts = params => (dispatch) => {
   const {
     search,
     pageNumber,
     pageSize,
+    resolve,
+    reject
   } = params
   console.log('[DEBUG]: SearchProducts')
 
@@ -91,6 +76,7 @@ export const searchProducts = params => (dispatch) => {
   })
   .then((res) => {
     let payload = {
+      search,
       totalPages: 0,
       currPage: 0,
       items: []
@@ -148,7 +134,10 @@ export const getCategories = params => (dispatch) => {
           status: 'success',
           payload: sortedCategories
         })
+
       })
+    } else {
+      return { status: 'fail', data: null }
     }
   })
 }
