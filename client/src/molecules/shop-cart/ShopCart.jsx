@@ -5,6 +5,8 @@ import Button from '../../elements/button'
 
 import styles from './ShopCart.css' 
 import StateManager from 'react-select'
+import { MinusCircle } from 'react-feather'
+import { removeFromCart } from '../../state/ducks/shopCart/actions'
 
 class ShopCart extends Component{
   constructor(props){
@@ -12,7 +14,8 @@ class ShopCart extends Component{
   }
 
   onDelete = (data) => () =>  {
-    console.log(data)
+    // Delete from the redux state
+    
   }
 
   render(){
@@ -29,7 +32,7 @@ class ShopCart extends Component{
           <p className={styles.amount}>{item.amount}x</p>
           <p className={styles.name}>{item.productName}</p>
           <p className={styles.price}>{item.productPrice}</p>
-          <div onClick={this.onDelete(item.productName)}> - </div>
+          <div onClick={this.onDelete(item.productName)}> <MinusCircle/> </div>
         </li>
       )
     })
@@ -68,4 +71,8 @@ const mapStateToProps = state => ({
   cart: state.shopCart.cart,
 })
 
-export default connect(mapStateToProps)(ShopCart)
+const mapDispatchToProps = {
+  removeFromCartConnect: removeFromCart
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ShopCart)

@@ -90,7 +90,7 @@ export const searchProducts = params => (dispatch) => {
       object.Products.forEach(bundle =>{
         bundle.Products.forEach(product => {
           const item = {
-            name: product.Description.replace('<br>', ' '),
+            name: `${product.Name} ${product.PackageSize}`,
             price: (product.Price * 1.15).toFixed(2),
             cupString: product.CupString,
             isAvailable: product.IsAvailable,
