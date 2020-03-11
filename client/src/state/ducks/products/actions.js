@@ -17,7 +17,7 @@ export const getProducts = params => (dispatch) => {
   const WoolworthsAPI = "https://www.woolworths.com.au/apis/ui/browse/category" 
 
   // `${WoolworthsAPI}?categoryId=${categoryId}&pageNumber=${pageNumber}&pageSize=${pageSize}&sortType=TraderRelevance&url=${url}&formatObject={"name":"${formatObject}"}`
-  fetch(`${WoolworthsAPI}?categoryId=${categoryId}&pageNumber=${pageNumber}&pageSize=${pageSize}&sortType=TraderRelevance&url=/shop/browse/${UrlFriendlyName}&formatObject={"name":"${escape(categoryName)}"}`, {
+  fetch(`${WoolworthsAPI}?categoryId=${categoryId}&pageNumber=${pageNumber}&pageSize=${pageSize}&isMobile=False&sortType=TraderRelevance&url=/shop/browse/${UrlFriendlyName}&formatObject={"name":"${escape(categoryName)}"}`, {
     method: 'POST',
   })
     .then((res) => {
@@ -32,10 +32,13 @@ export const getProducts = params => (dispatch) => {
         res.json().then(object =>{
           payload.totalPages = Math.ceil(object.TotalRecordCount/pageSize)
           payload.currPage = pageNumber
+
+          console.log(object.Bundles[0])
           object.Bundles.forEach(bundle =>{
             bundle.Products.forEach(product => {
+              // console.log(product)
               const item = {
-                name: product.Description.replace('<br>', ' '),
+                name: `${product.Name} ${product.PackageSize}`,
                 price: (product.Price * 1.15).toFixed(2),
                 cupString: product.CupString,
                 isAvailable: product.IsAvailable,
@@ -93,6 +96,7 @@ export const searchProducts = params => (dispatch) => {
             isAvailable: product.IsAvailable,
             image: product.SmallImageFile,
           }
+          console.log(item)
           payload.items.push(item)
         })
       })

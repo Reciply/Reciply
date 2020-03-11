@@ -1,6 +1,10 @@
 import React, { Component } from 'react'
 
 import Button from '../../elements/button'
+import { connect } from 'react-redux'
+import {
+  addToCart
+} from '../../state/ducks/shopCart/actions'
 
 import styles from './ProductCard.css'
 
@@ -9,26 +13,41 @@ class ProductCard extends Component{
     super(props)
   }
 
-  handleAddToCard = (encodeURIComponent) => {
-    console.log("Add to cart")
+  handleAddToCard = () => {
+
+    const {
+      productName,
+      productPrice,
+      cupString,
+      addToCartConnect
+    } = this.props
+
+    let item = {
+      productName, productPrice, cupString
+    }
+
+    console.log(item)
+
+    addToCartConnect(item)
+    
   }
 
   // <ProductCard productName="Melon" productPrice="3.16" cupString="$4.90/1Kg" />
   render(){
     const {
+      key,
       productName,
       productPrice,
       cupString,
       image,
-      isAvailable,
-      addToCart,
+      isAvailable
     } = this.props
 
     return(
-      <div className={styles.card}>
+      <div key={key} className={styles.card}>
         <img src={image}/>
 
-        <p className={styles.name}>{productName}</p>
+        <p>{productName}</p>
           {
             isAvailable ? (
             <div className={styles.price}>
@@ -45,4 +64,13 @@ class ProductCard extends Component{
   }
 }
 
-export default ProductCard
+
+const mapStateToProps = state => ({
+  cart: state.shopCart.cart,
+})
+
+const mapDispatchToProps = {
+  addToCartConnect: addToCart,
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProductCard)

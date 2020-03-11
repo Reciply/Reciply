@@ -13,3 +13,8 @@
   flex-flow: row;
   justify-content: space-between;
 }
+
+.container{
+  flex: 8;
+  height: auto;
+}

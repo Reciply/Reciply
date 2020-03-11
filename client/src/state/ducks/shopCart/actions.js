@@ -7,10 +7,17 @@ export const addToCart = params => (dispatch) => {
     ...params, 
     amount: 1, 
   }
-
   dispatch({
     type: ADD_TO_CART,
     status: 'success',
     payload: item
+  })
+}
+
+export const removeFromCart = params => (dispatch) => {
+  dispatch({
+    type: REMOVE_FROM_CART,
+    status: 'success',
+    payload: params
   })
 }

@@ -12,53 +12,41 @@ import styles from './ProductList.css'
 class ProductList extends Component{
   constructor(props){
     super(props)
-    this.state = {
-      searchText: '',
-      categoryId: '1-E5BEE36E',
-      pageNumber: 1,
-      pageSize: 24,
-      url: '/shop/browse/fruit-veg',
-      formatObject: 'Fruit %26 Veg',
-      search: '',
+  }
+
+  fetchPage = (e) => {
+    const {
+      getProductsConnect,
+      searchFor,
+      byCategory,
+      categories
+    } = this.props
+
+    const pageNum = e.target.value
+    if(!searchFor && byCategory){
+      const currentCategory = categories[categories.findIndex(c => c.Name === byCategory)]
+      console.log(currentCategory)
+      const promise = new Promise((resolve, reject) => {
+      getProductsConnect({
+        categoryId : currentCategory.NodeId,
+        pageNumber : pageNum,
+        pageSize : 36, 
+        url : currentCategory.UrlFriendlyName,
+        categoryName : currentCategory.Name
+      }, resolve, reject)
+      })
+      promise.catch((res) => {
+        console.log("Something went wrong with fetching the page")
+      })
+      this.setState({
+        pageNumber: pageNum
+      })
+    } else if (searchFor && !byCategory){
+
     }
   }
 
-  fetchCategoryPage = (e) => {
-    const { 
-      getProductsConnect
-    } = this.props
-    const {
-      categoryId,
-      pageNumber,
-      pageSize,
-      url,
-      formatObject
-    } = this.state
-    const pageNum = e.target.value
-    const promise = new Promise((resolve, reject) => {
-      getProductsConnect({
-      categoryId : categoryId,
-      pageNumber : pageNum,
-      pageSize : pageSize, 
-      url : url,
-      formatObject : formatObject
-      }, resolve, reject)
-    })
-    promise.then(() => {
-      console.log(this.state)
-    })
-    .catch((res) => {
-      console.log("something went wrong with turning the page")
-    })
-    this.setState({
-      pageNumber: pageNum
-    })
-  }
-
   render(){
-    const { 
-      search 
-    } = this.state
     const {
       productsList,
       totalPages,
@@ -69,26 +57,32 @@ class ProductList extends Component{
     for (var pageNumber = 1; pageNumber < totalPages+1; pageNumber++){
       if (pageNumber === currPage){
         pageList.push(<h2>{pageNumber}</h2>)
-      } else if(!search){
-        pageList.push(<button value={pageNumber} onClick={(e) => this.fetchCategoryPage(e)}>{pageNumber}</button>)
-      } else if(search) {
-        pageList.push(<button value={pageNumber} onClick={(e) => this.fetchSearch(e)}>{pageNumber}</button> )
+      } else {
+        pageList.push(<button value={pageNumber} onClick={(e) => this.fetchPage(e)}>{pageNumber}</button>)
       }
     }
 
     return(
-      <div>
+      <div className={styles.container}>
         <h1>Fruit and Veg</h1>
         <div className={styles.products}>
+        <ProductCard
+                isAvailable={true}
+                productName="productName"
+                cupString="test.value"
+                productPrice="100.40"
+                addToCart={this.handleAddToCart}
+              />
          {productsList.map((value, index) => {
             return (
               <ProductCard
+                key= {index}
                 isAvailable={value.isAvailable}
-                key={index}
                 productName={value.name}
                 image={value.image}
                 cupString={value.cupString}
                 productPrice={value.price}
+                addToCart={this.handleAddToCart}
               />
             ) 
          })}
@@ -107,7 +101,10 @@ class ProductList extends Component{
 const mapStateToProps = state => ({
   currPage: state.products.currPage,
   totalPages: state.products.totalPages,
-  productsList: state.products.productsList
+  productsList: state.products.productsList,
+  searchFor: state.products.searchFor,
+  byCategory: state.products.byCategory,
+  categories: state.products.categories,
 })
 
 const mapDispatchToProps = {

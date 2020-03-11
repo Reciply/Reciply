@@ -8,6 +8,10 @@ import {
   getCategories, 
 } from '../../state/ducks/products/actions'
 
+import {
+  Search
+} from 'react-feather'
+
 import TextField from '../../elements/textfield'
 import Button from '../../elements/button'
 import Select from 'react-select'
@@ -26,21 +30,42 @@ class ProductController extends Component{
 
   componentDidMount(){
     const {
+      categoryOptions,
       categorySelect
     } = this.state
     const {
       getCategoriesConnect,
       categories
     } = this.props
-    
+
     getCategoriesConnect()
+    // let promise = new Promise(() => getCategoriesConnect())
+    // promise.then((res) => {
+    //   console.log(res)
+    //   console.log(categories)
+    //   const parseCategories = []
+    //   console.log(categories)
+    //   categories.map(category => {
+    //     parseCategories.push({
+    //       label: category.Name,
+    //       value: category.NodeId
+    //     })
+    //   })
+  
+    //   console.log(parseCategories)
+  
+    //   this.setState({
+    //     categoryOptions: [ 
+    //         ...parseCategories
+    //     ]
+    //   })
+    // })
+    // .catch(res => {
+    //   console.log(res)
+    // })
   }
 
   handleSelectCategory = (value) => {
-    const {
-      search
-    } = this.state
-
     const {
       getProductsConnect,
       categories
@@ -60,7 +85,7 @@ class ProductController extends Component{
       pageNumber : 1,
       pageSize : 36, 
       UrlFriendlyName : categories[selectedCategory].UrlFriendlyName,
-      formatObject : categories[selectedCategory].Name
+      categoryName : categories[selectedCategory].Name
     })
   }
 
@@ -78,7 +103,10 @@ class ProductController extends Component{
       searchProductsConnect
     } = this.props
 
-    console.log(search)
+    this.setState({
+      categorySelect: null
+    })
+    
     if (search){
       searchProductsConnect({
         search: search,
@@ -94,11 +122,10 @@ class ProductController extends Component{
     } = this.props
 
     const {
-      categorySelect,
       search
     } = this.state
 
-    const categoryOptions = []
+    let categoryOptions = []
 
     categories.map(category => {
       categoryOptions.push({
@@ -109,17 +136,21 @@ class ProductController extends Component{
 
     return(
       <div className={styles.productController}>
-          <TextField
-            name="search" 
-            className={styles.searchBar}
-            placeholder="Search ..."
-            value={search}
-            onChange={value => this.handleTextChange('search', value)}
-          />
-          <Button onClick={this.handleSearch}>Search</Button>
-          <Select 
+          <div className={styles.searchBar}>
+            <TextField
+              name="search"
+              className={styles.searchTxt}
+              placeholder="Search ..."
+              value={search}
+              onChange={value => this.handleTextChange('search', value)}
+            />
+          </div>
+          <Button className={styles.searchBtn} onClick={this.handleSearch}>
+            <Search className={styles.searchIcon} />
+          </Button>
+          <Select
+            className={styles.selectCat}
             options={categoryOptions}
-            value={categorySelect || categoryOptions[0] || null}
             onChange={value => this.handleSelectCategory(value)}
           />
       </div>

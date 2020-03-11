@@ -1,0 +1,28 @@
+.searchBar{
+  width: 100px;
+}
+
+.searchTxt{
+ height: 2.375rem; 
+}
+
+.searchBtn{
+  width: min-content;
+  height: min-content;
+  padding: .5rem;
+  height: 2.375rem; 
+}
+
+.searchBtn > .searchIcon{
+  height: 2.375rem;
+}
+
+.selectCat{
+  width: 20rem;
+  height: 2.375rem;
+}
+
+.productController{
+  display: flex;
+  flex-flow: row;
+}
