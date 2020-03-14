@@ -3,6 +3,8 @@ const path = require('path');
 
 const config = {
   entry: [
+    'core-js/stable',
+    'regenerator-runtime/runtime',
     'react-hot-loader/patch',
     './src/index.jsx'
   ],

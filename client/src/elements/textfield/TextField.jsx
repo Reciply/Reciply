@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 
 import styles from './TextField.css'
 
@@ -24,18 +23,21 @@ class TextField extends Component{
       type = 'text',
       className = '',
       value = '',
+      appearance= 'default',
       length = 'default',
       error = '',
       name,
       ...other
     } = this.props
 
+    const classname = `${styles[appearance]} ${className || ''}`
+
     return(
       <div className={styles.container}>
         <input
           {...other}
           type={type}
-          className={styles.default}
+          className={classname}
           placeholder={placeholder}
           name={name}
           value={value}
@@ -43,7 +45,6 @@ class TextField extends Component{
           disabled={isDisabled}
         />
   
-        {/* TODO: add an I con here */}
       </div>
     )
   }

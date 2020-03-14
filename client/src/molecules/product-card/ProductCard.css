@@ -1,0 +1,35 @@
+.card{
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  width: 220px;
+  height: 23rem;
+  background: white;
+  margin-left: 30px;
+  box-shadow: 0 0 1px rgba(0,0,0,.3);
+  padding: 1rem;
+}
+
+.card > p{
+  margin-bottom: 2.5rem;
+  width: 100%;
+  height: 2.5rem;
+}
+
+.card > img{
+  margin: 22px auto 18px;
+  height: 7.5rem;
+}
+
+.card > .addToCart{
+  width: 100%;
+  align-self: flex-end;
+}
+
+.card > .price{
+  width: 100%;
+  display: flex;
+  flex-flow: row;
+  justify-content: space-between;
+  margin-bottom: 2.5rem;
+}
