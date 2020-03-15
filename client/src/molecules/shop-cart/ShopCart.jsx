@@ -14,8 +14,12 @@ class ShopCart extends Component{
   }
 
   onDelete = (productName) => () =>  {
+    const {
+      removeFromCartConnect
+    } = this.props
+
     // Delete from the redux state
-    removeFromCart(productName)
+    removeFromCartConnect(productName)
   }
 
   render(){
