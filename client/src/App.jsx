@@ -10,11 +10,11 @@ import ProductPage from './pages/productpage/ProductPage';
 import OrderPage from './pages/orderpage/OrderPage';
 import ProfilePage from './pages/profilepage/ProfilePage'
 
-import './App.css';
+import styles from './App.css';
 
 function App(){
   return(
-    <div className="App" id="app">
+    <div className={styles.App} id="app">
       <Provider store={store}>
         <Router>
           <Switch>
