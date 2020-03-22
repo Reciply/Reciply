@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 
 import { connect } from 'react-redux'
 import Button from '../../elements/button'
-
+import { Link } from 'react-router-dom'
 import styles from './ShopCart.css' 
 import StateManager from 'react-select'
 import { MinusCircle } from 'react-feather'
@@ -41,12 +41,10 @@ class ShopCart extends Component{
       )
     })
 
-    console.log(totalPrice)
-
     return(
       <div className={styles.container}>
         <div className={styles.orderSummary}>
-          <Button className={styles.checkOut}>Proceed to cart</Button>
+          <Link to="/order" className={styles.checkOut}> <Button> Proceed to cart </Button> </Link>
           <ul className={styles.shoppingList}>
             <li className={styles.shopListItem}>
               <p className={styles.amount}>Amount</p>
