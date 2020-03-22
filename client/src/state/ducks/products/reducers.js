@@ -38,7 +38,7 @@ const reducer = (state = initialState, action) => {
         totalPages: action.payload.totalPage,
         currPage: action.payload.currPage,
         productsList: action.payload.items,
-        byCategory: '',
+        byCategory: `Showing items related to ${action.payload.search}` ,
         searchFor: action.payload.search
       }
     }
