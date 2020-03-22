@@ -1,4 +1,7 @@
 html{
-  --g500: rgb(67, 176, 42);
-  --w500: rgb(255,255,255);
+  /* Black colors */
+  --b100: #1B262C;
+  /*Main colors*/
+  --g100: #dbe9b7;
+  --w100: #FDFDF6;
 }
