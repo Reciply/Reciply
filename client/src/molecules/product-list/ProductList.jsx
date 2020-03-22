@@ -50,7 +50,8 @@ class ProductList extends Component{
     const {
       productsList,
       totalPages,
-      currPage
+      currPage,
+      byCategory
     } = this.props 
 
     let pageList = []
@@ -64,15 +65,8 @@ class ProductList extends Component{
 
     return(
       <div className={styles.container}>
-        <h1>Fruit and Veg</h1>
+        <h1>{byCategory}</h1>
         <div className={styles.products}>
-        <ProductCard
-                isAvailable={true}
-                productName="productName"
-                cupString="test.value"
-                productPrice="100.40"
-                addToCart={this.handleAddToCart}
-              />
          {productsList.map((value, index) => {
             return (
               <ProductCard

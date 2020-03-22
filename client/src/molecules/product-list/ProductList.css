@@ -17,4 +17,5 @@
 .container{
   flex: 8;
   height: auto;
+  padding-left: 1rem;
 }
