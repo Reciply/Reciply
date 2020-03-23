@@ -32,7 +32,6 @@ class ProductCard extends Component{
     
   }
 
-  // <ProductCard productName="Melon" productPrice="3.16" cupString="$4.90/1Kg" />
   render(){
     const {
       key,

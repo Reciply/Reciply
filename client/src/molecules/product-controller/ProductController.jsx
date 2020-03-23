@@ -72,10 +72,6 @@ class ProductController extends Component{
       categories
     } = this.props
 
-    const {
-      search
-    } = this.state
-
     let categoryOptions = []
 
     categories.map(category => {
