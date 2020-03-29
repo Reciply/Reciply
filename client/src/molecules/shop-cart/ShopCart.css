@@ -1,18 +1,24 @@
 .container{
   flex: 3;
   display: flex;
-  border: 1px solid black;
 }
 
 .container > .orderSummary{
   padding: 1rem 2rem;
   width: 16.375rem;
   margin: 0 auto;
-  border: 1px solid black;
+  background-color: var(--w100);
+  box-shadow: 3px 3px 7px -1px #000000;
   height: min-content;
 }
 
 .orderSummary > .checkOut{
+  width: 100%;
+  margin-bottom: 1rem;
+  text-decoration: none;
+}
+
+.checkOut > button{
   width: 100%;
   margin-bottom: 1rem;
 }

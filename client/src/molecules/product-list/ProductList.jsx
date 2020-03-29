@@ -50,29 +50,21 @@ class ProductList extends Component{
     const {
       productsList,
       totalPages,
-      currPage
+      currPage,
+      byCategory
     } = this.props 
+
 
     let pageList = []
     for (var pageNumber = 1; pageNumber < totalPages+1; pageNumber++){
-      if (pageNumber === currPage){
-        pageList.push(<h2>{pageNumber}</h2>)
-      } else {
-        pageList.push(<button value={pageNumber} onClick={(e) => this.fetchPage(e)}>{pageNumber}</button>)
-      }
+      pageList.push(<button value={pageNumber} onClick={(e) => this.fetchPage(e)}>{pageNumber}</button>)
+      
     }
 
     return(
       <div className={styles.container}>
-        <h1>Fruit and Veg</h1>
+        <h1>{byCategory}</h1>
         <div className={styles.products}>
-        <ProductCard
-                isAvailable={true}
-                productName="productName"
-                cupString="test.value"
-                productPrice="100.40"
-                addToCart={this.handleAddToCart}
-              />
          {productsList.map((value, index) => {
             return (
               <ProductCard
@@ -89,9 +81,9 @@ class ProductList extends Component{
         </div>
 
         <div className={styles.pagination}>
-          <ArrowLeft/>
-          {pageList}     
-          <ArrowRight/>
+          
+            {pageList}
+       
         </div>
       </div>
     )

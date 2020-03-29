@@ -1,5 +1,6 @@
 import {
-  ADD_TO_CART
+  ADD_TO_CART,
+  REMOVE_FROM_CART
 } from './types'
 
 export const addToCart = params => (dispatch) => {
@@ -15,6 +16,11 @@ export const addToCart = params => (dispatch) => {
 }
 
 export const removeFromCart = params => (dispatch) => {
+  const item = {
+    ...params,
+  }
+
+  console.log('[DEBUG]: action remove from cart')
   dispatch({
     type: REMOVE_FROM_CART,
     status: 'success',

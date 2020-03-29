@@ -11,10 +11,11 @@
 .pagination{
   display: flex;
   flex-flow: row;
-  justify-content: space-between;
+  flex-wrap: wrap;
 }
 
 .container{
   flex: 8;
   height: auto;
+  padding-left: 1rem;
 }
