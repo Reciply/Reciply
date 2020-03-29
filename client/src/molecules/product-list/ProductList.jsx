@@ -54,13 +54,11 @@ class ProductList extends Component{
       byCategory
     } = this.props 
 
+
     let pageList = []
     for (var pageNumber = 1; pageNumber < totalPages+1; pageNumber++){
-      if (pageNumber === currPage){
-        pageList.push(<h2>{pageNumber}</h2>)
-      } else {
-        pageList.push(<button value={pageNumber} onClick={(e) => this.fetchPage(e)}>{pageNumber}</button>)
-      }
+      pageList.push(<button value={pageNumber} onClick={(e) => this.fetchPage(e)}>{pageNumber}</button>)
+      
     }
 
     return(
@@ -83,9 +81,9 @@ class ProductList extends Component{
         </div>
 
         <div className={styles.pagination}>
-          <ArrowLeft/>
-          {pageList}     
-          <ArrowRight/>
+          
+            {pageList}
+       
         </div>
       </div>
     )
