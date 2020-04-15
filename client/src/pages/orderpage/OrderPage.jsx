@@ -9,6 +9,14 @@ import {
 
 import TextField from '../../elements/textfield'
 import Button from '../../elements/button'
+import {Elements} from '@stripe/react-stripe-js'
+import {loadStripe} from '@stripe/stripe-js'
+import CheckoutForm from '../../molecules/checkout-form'
+
+// Make sure to call `loadStripe` outside of a component’s render to avoid
+// recreating the `Stripe` object on every render.
+const stripePromise = loadStripe("pk_test_bs9gcFqzGQn9v5FyDlPL3sVu00DK7P3kyz");
+
 
 import styles from './OrderPage.css'
 
@@ -21,14 +29,35 @@ class OrderPage extends Component{
     }
   }
 
+  componentDidMount () {
+    // const stripe = loadStripe("pk_test_bs9gcFqzGQn9v5FyDlPL3sVu00DK7P3kyz") 
+  
+    // this.setState({
+    //   stripePromise: stripe
+    // })
+  }
+
   render(){
     const { 
-      errors
+      errors,
     } = this.state
 
     return(
       <div>
-        <div className={styles.topBar}>
+        something
+        <Elements stripe={stripePromise}>
+          <CheckoutForm/>
+        </Elements>
+      </div>
+    )
+  }
+}
+
+export default OrderPage
+
+
+  {/* <div> 
+         <div className={styles.topBar}>
           <div>Logo here</div>
         </div>
         <div className={styles.deliveryForm}>
@@ -54,7 +83,7 @@ class OrderPage extends Component{
             <TextField/>
           </div>
           <div>
-            <h3><CreditCard/> Add a payment method</h3> 
+            <CardSection/>
           </div>
         </div>
         <div className={styles.orderSummary}>
@@ -70,10 +99,5 @@ class OrderPage extends Component{
             <h5>Total</h5>
           </div>
         </div> 
-
-      </div>
-    )
-  }
-}
-
-export default OrderPage
+        </div> 
+         */}
