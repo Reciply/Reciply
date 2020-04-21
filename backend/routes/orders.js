@@ -34,34 +34,34 @@ router.post('/pay', async (req, res) => {
 
   const orderAmount = calculateOrderAmount(items);
 
-  try {
-    let intent;
-    if (paymentMethodId) {
-      // Create new PaymentIntent with a PaymentMethod ID from the client.
-      intent = await stripe.paymentIntents.create({
-        amount: orderAmount,
-        currency: currency,
-        payment_method: paymentMethodId,
-        confirmation_method: "manual",
-        confirm: true,
-        // If a mobile client passes `useStripeSdk`, set `use_stripe_sdk=true`
-        // to take advantage of new authentication features in mobile SDKs
-        use_stripe_sdk: useStripeSdk,
-      });
-      //TODO: After create, if the PaymentIntent's status is succeeded, fulfill the order.
-      console.log(intent)
-    } else if (paymentIntentId) {
-      // Confirm the PaymentIntent to finalize payment after handling a required action
-      // on them client.
-      intent = await stripe.paymentIntents.confirm(paymentIntentId);
-      //TODO: After confirm, if the PaymentIntent's status is succeeded, fulfill the order. Send email here
-      console.log(intent)
-    }
-    res.send(generateResponse(intent));
-  } catch (e) {
-    //TODO: Handle "hard declines" https://stripe.com/docs/declines/codes
-    res.send({ error: e.message });
-  }
+  // try {
+  //   let intent;
+  //   if (paymentMethodId) {
+  //     // Create new PaymentIntent with a PaymentMethod ID from the client.
+  //     intent = await stripe.paymentIntents.create({
+  //       amount: orderAmount,
+  //       currency: currency,
+  //       payment_method: paymentMethodId,
+  //       confirmation_method: "manual",
+  //       confirm: true,
+  //       // If a mobile client passes `useStripeSdk`, set `use_stripe_sdk=true`
+  //       // to take advantage of new authentication features in mobile SDKs
+  //       use_stripe_sdk: useStripeSdk,
+  //     });
+  //     //TODO: After create, if the PaymentIntent's status is succeeded, fulfill the order.
+  //     console.log(intent)
+  //   } else if (paymentIntentId) {
+  //     // Confirm the PaymentIntent to finalize payment after handling a required action
+  //     // on them client.
+  //     intent = await stripe.paymentIntents.confirm(paymentIntentId);
+  //     //TODO: After confirm, if the PaymentIntent's status is succeeded, fulfill the order. Send email here
+  //     console.log(intent)
+  //   }
+  //   res.send(generateResponse(intent));
+  // } catch (e) {
+  //   //TODO: Handle "hard declines" https://stripe.com/docs/declines/codes
+  //   res.send({ error: e.message });
+  // }
 
 })
 

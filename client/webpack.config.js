@@ -1,5 +1,4 @@
-const webpack = require('webpack');
-const path = require('path');
+const path = require('path')
 
 const config = {
   entry: [
@@ -57,8 +56,8 @@ const config = {
   },
   devServer: {
     contentBase: './dist',
-    historyApiFallback: true,
+    historyApiFallback: true
   }
-};
+}
 
-module.exports = config;
+module.exports = config

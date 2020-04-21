@@ -1,10 +1,20 @@
-import React from 'react';
-import {useStripe, useElements, CardElement} from '@stripe/react-stripe-js';
+import React from 'react'
+import {useStripe, useElements, CardElement} from '@stripe/react-stripe-js'
 
-import CardSection from '../card-section';
+import { 
+  MapPin,
+  Truck,
+  Phone,
+  CreditCard, 
+} from 'react-feather'
 
-import {createPaymentIntent} from '../../api/OrderAPI';
+import CardSection from '../card-section'
+import TextField from '../../elements/textfield'
+import Button from '../../elements/button'
 
+import {createPaymentIntent} from '../../api/OrderAPI'
+
+import styles from './CheckoutForm.css'
 
 export default function CheckoutForm() {
   const stripe = useStripe();
@@ -56,7 +66,28 @@ export default function CheckoutForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form clasasName={styles.deliveryForm} onSubmit={handleSubmit}>
+      <div>
+        <h3><MapPin/> Add delivery address</h3>
+        <h6>UNIT NUMBER</h6>
+        <TextField/>
+        <h5>STREET NUMBER</h5>
+        <TextField/>
+        <h5>SUBURB</h5>
+        <TextField/>
+        <h5>POSTCODE</h5>
+        <TextField/>
+        <Button>Confirm</Button>
+      </div>
+      <div>
+        <h3><Truck /> Delivery Instructions</h3>
+        <TextField /> 
+      </div>
+      <div>
+        <h3>  <Phone/> Mobile Number </h3>
+        <p>We use your number to text or call you about your order</p>
+        <TextField/>
+      </div>
       <CardSection />
       <button disabled={!stripe}>Confirm order</button>
     </form>

@@ -20,8 +20,6 @@ router.post('/sendList', (req, res) => {
     groceryList = groceryList + `<br/>I need ${grocery[item].amount}x ${grocery[item].name} around this price $${grocery[item].price}` 
   }
 
-  console.log(groceryList)
-
   const msg = {
     to: 'kazuiwa809275@gmail.com',
     from: 'arvy.au@gmail.com',
@@ -31,7 +29,7 @@ router.post('/sendList', (req, res) => {
   sgMail.send(msg)
   .catch(error => {console.log(error)});
 
-  res.send({
+  res.status(200).send({
     status:200,
     message: 'success'
   })

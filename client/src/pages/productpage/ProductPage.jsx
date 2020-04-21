@@ -11,18 +11,14 @@ import ShopCart from '../../molecules/shop-cart'
 
 import styles from './ProductPage.css'
 
-class ProductPage extends Component{
-  constructor(props){
-    super(props)
-  }
-  
-  render(){
-    return(
+class ProductPage extends Component {
+  render () {
+    return (
       <div className={styles.page}>
         <ProductController/>
         <div className={styles.main}>
           <ProductList/>
-          <ShopCart/> 
+          <ShopCart/>
         </div>
       </div>
     )
@@ -35,12 +31,11 @@ const mapStateToProps = state => ({
   productsList: state.products.productsList,
   searchFor: state.products.searchFor,
   byCategory: state.products.byCategory,
-  categories: state.products.categories,
-  productsList: state.products.productsList,
+  categories: state.products.categories
 })
 
 const mapDispatchToProps = {
-  getProductsConnect: getProducts,
+  getProductsConnect: getProducts
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProductPage)
