@@ -11,7 +11,9 @@
     "nodemon": "^2.0.2",
     "sequelize": "^5.21.3"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "sequelize-cli": "^5.5.1"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
