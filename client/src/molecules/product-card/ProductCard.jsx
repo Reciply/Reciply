@@ -9,12 +9,11 @@ import {
 import styles from './ProductCard.css'
 
 class ProductCard extends Component{
-  constructor(props){
+  constructor(props) {
     super(props)
   }
 
   handleAddToCard = () => {
-
     const {
       productName,
       productPrice,
@@ -58,11 +57,10 @@ class ProductCard extends Component{
           }
 
         <Button isDisabled={!isAvailable} className={styles.addToCart} onClick={this.handleAddToCard}>Add to cart</Button>
-      </div>
+      </div>  
     )
   }
 }
-
 
 const mapStateToProps = state => ({
   cart: state.shopCart.cart,

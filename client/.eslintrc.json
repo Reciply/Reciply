@@ -1,11 +1,12 @@
 {
     "env": {
         "browser": true,
-        "es6": true
+        "es6": true,
+        "node": true
     },
     "extends": [
-        "eslint:recommended",
-        "plugin:react/recommended"
+        "plugin:react/recommended",
+        "standard"
     ],
     "globals": {
         "Atomics": "readonly",
@@ -15,20 +16,12 @@
         "ecmaFeatures": {
             "jsx": true
         },
-        "ecmaVersion": 2018,
-        "sourceType": "module"
+        "ecmaVersion": 2018
     },
     "plugins": [
-        "react",
-        "class-property"
+        "react"
     ],
     "rules": {
-        "no-trailing-whitespace": true,
-        "semi": ["error", "never"],
-        "rest-spread-spacing": "warn",
-        "prefer-spread": "warn",
-        "react/jsx-props-no-spreading": "off",
-        "arrow-parens": "off",
-        "camelcase": "off"
+        "no-trailing-spaces": "error"
     }
 }
