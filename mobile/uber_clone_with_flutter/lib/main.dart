@@ -4,6 +4,7 @@ import 'package:uber_clone/states/app_state.dart';
 import 'screens/home.dart';
 //todo add flutter sdk
 //added to the feature branch in the new org. repo
+//made the repo private for the org.
 
 void main() {
   return runApp(MultiProvider(
