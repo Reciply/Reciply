@@ -5,15 +5,19 @@ import { connect } from 'react-redux'
 import styles from './OrderSummary.css'
 
 class OrderSummary extends Component {
+  // constructor (props) {
+  //   super(props)
+  // }
+
   render () {
     const {
       cart
     } = this.props
+    console.log(cart)
     return (
       <div>
         <div className={styles.orderSummary}>
           <Button className={styles.confirm}> Confirm Order </Button>
-          {cart}
           <div>
             Subtotal
             Delivery
@@ -30,7 +34,7 @@ class OrderSummary extends Component {
 }
 
 const mapStateToProps = state => ({
-  cart: state.products.cart
+  cart: state.shopCart.cart
 })
 
 export default connect(mapStateToProps)(OrderSummary)

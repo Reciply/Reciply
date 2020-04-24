@@ -21,7 +21,7 @@ export const login = async (values, resolve, reject) => {
         res.json().then(object => reject(object.message))
       }
     })
-    .catch((err) => console.log(error))
+    .catch((err) => console.log(err))
 }
 
 /**
@@ -36,7 +36,7 @@ export const checkPostCode = async (postCode, resolve, reject) => {
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({"postCode": postCode}),
+    body: JSON.stringify({"postCode": postCode})
   })
     .then((res) => {
       if (res.status === 200) {
@@ -53,15 +53,17 @@ export const checkPostCode = async (postCode, resolve, reject) => {
  * @param {func} resolve - promise async function
  * @param {func} reject - promise async function
  */
+
+
 export const register = async (values, resolve, reject) => {
-  fetch(`localhost:3000/user/register`, {
+  fetch('localhost:3000/user/register', {
     method: 'POST',
     mode: 'cors',
     credentials: 'include',
     headers: {
-      'Content-Type': 'application/json',
+      'Content-Type': 'application/json'
     },
-    body: JSON.stringify(values),
+    body: JSON.stringify(values)
   })
     .then((res) => {
       if (res.status === 200) {
@@ -70,5 +72,5 @@ export const register = async (values, resolve, reject) => {
         res.json().then(object => reject(object.message))
       }
     })
-    .catch((err) => console.log(error))
+    .catch((err) => console.log(err))
 }
