@@ -10,9 +10,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import styles from './Button.css';
-//TODO: Some of this code can be shortened but is not because of future proofing
+// TODO: Some of this code can be shortened but is not because of future proofing
 const Button = (props) =>{
-  //The code is the way that it is for future proofing. 
+  // The code is the way that it is for future proofing. 
   const {
     type = 'button',
     isDisabled = false,

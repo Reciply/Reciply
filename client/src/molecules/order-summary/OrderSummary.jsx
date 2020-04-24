@@ -19,6 +19,11 @@ class OrderSummary extends Component {
         <div className={styles.orderSummary}>
           <Button className={styles.confirm}> Confirm Order </Button>
           <div>
+            {cart.map((value, index) => { 
+              return (<div key={index}>somethings</div>)
+            })}
+          </div>
+          <div>
             Subtotal
             Delivery
             Service Fee

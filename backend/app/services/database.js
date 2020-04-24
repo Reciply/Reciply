@@ -8,8 +8,8 @@ var Sequelize = require('sequelize')
 
 // instantiate before using 'sequelize'
 module.exports = new Sequelize(
-    config.db.db_name,
-    config.db.user,
-    config.db.password,
-    config.db.details
+  config.db.db_name,
+  config.db.user,
+  config.db.password,
+  config.db.details
 )
