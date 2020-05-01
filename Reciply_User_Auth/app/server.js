@@ -8,7 +8,7 @@
 // 1: import NPM dependencies (modules)
 var express = require("express")
 var bodyParser = require("body-parser")
-var morgan = require("morgan");
+var morgan = require("morgan")
 var sequelize = require("sequelize");
 var passport = require("passport");
 var jwt = require("jsonwebtoken");
