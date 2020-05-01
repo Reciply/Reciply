@@ -6,13 +6,13 @@
 "use strict"; // enables "strict mode", a feature allowing for placing functions/programs in a strict context
 
 // 1: import NPM dependencies (modules)
-var express = require("express");
-var bodyParser = require("body-parser");
-var morgan = require("morgan");
-var sequelize = require("sequelize");
-var passport = require("passport");
-var jwt = require("jsonwebtoken");
-var path = require("path");
+var express = require("express")
+var bodyParser = require("body-parser")
+var morgan = require("morgan")
+var sequelize = require("sequelize")
+var passport = require("passport")
+var jwt = require("jsonwebtoken")
+var path = require("path")
 
 // 2: app-related modules
 var hookJWTStrategy = require("./services/passportStrategy");
