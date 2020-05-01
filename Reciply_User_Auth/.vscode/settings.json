@@ -1,7 +1,5 @@
 {
   "editor.tabSize": 2,
-  "[yaml]": {
-  
-  },
+  "[yaml]": {},
   "editor.detectIndentation": false
 }

@@ -1,15 +1,12 @@
-(function() {
-    'use strict';
+(function () {
+  "use strict";
 
-    var jamesAuth = angular.module('jamesAuth', [
-        'ui.router',
-        'ngCookies'
-    ]);
+  var jamesAuth = angular.module("jamesAuth", ["ui.router", "ngCookies"]);
 
-    // Static data constant.
-    var staticData = {};
+  // Static data constant.
+  var staticData = {};
 
-    /*
+  /*
     var userRoles = staticData.userRoles = {
         guest: 1,
         user: 2,
@@ -22,31 +19,31 @@
         admin: userRoles.admin
     };*/
 
-    jamesAuth.constant('staticData', staticData);
+  jamesAuth.constant("staticData", staticData);
 
-    // Config block.
-    jamesAuth.config([
-        '$stateProvider',
-        '$urlRouterProvider',
-        '$httpProvider',
-        '$locationProvider',
-        'staticData',
-        authConfig
-    ]);
+  // Config block.
+  jamesAuth.config([
+    "$stateProvider",
+    "$urlRouterProvider",
+    "$httpProvider",
+    "$locationProvider",
+    "staticData",
+    authConfig,
+  ]);
 
-    function authConfig(
-        $stateProvider,
-        $urlRouterProvider,
-        $httpProvider,
-        $locationProvider,
-        staticData ) {
+  function authConfig(
+    $stateProvider,
+    $urlRouterProvider,
+    $httpProvider,
+    $locationProvider,
+    staticData
+  ) {
+    // Index route
+    $stateProvider.state("index", {
+      url: "/",
+      templateUrl: "app/views/partials/partial-index.html",
+    });
 
-        // Index route
-        $stateProvider.state('index', {
-            url: '/',
-            templateUrl: 'app/views/partials/partial-index.html'
-        });
-
-        $locationProvider.html5Mode(true);
-    }
+    $locationProvider.html5Mode(true);
+  }
 })();
