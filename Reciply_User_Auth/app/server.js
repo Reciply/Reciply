@@ -1,3 +1,4 @@
+// hello, Rhys!
 // semi-colon ; is optional in Node.js and browser JavaScript
 'use strict' // enables "strict mode", a feature allowing for placing functions/programs in a strict context
 
