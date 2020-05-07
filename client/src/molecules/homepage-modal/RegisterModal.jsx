@@ -1,9 +1,13 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import {
+  register
+} from '../../state/ducks/users/actions'
 
 import TextField from '../../elements/textfield'
 import Button from '../../elements/button'
 
-import { checkPostCode, register, login } from '../../api/AuthenticationHelper'
+//import { checkPostCode, register, login } from '../../api/AuthenticationHelper'
 
 import styles from './RegisterModal.css'
 
@@ -14,8 +18,13 @@ class RegisterModal extends Component{
       postCode: '',
       showRegister: false,
       postCodeErr: '',
+      regFirstName: '',
+      regLastName: '',   
       regEmail: '',
-      regPwd: ''
+      regPwd: '',
+      regCnfrmPwd: '',
+      regAddress: '',
+      regError: '',
     }
   }
 
@@ -45,28 +54,60 @@ class RegisterModal extends Component{
   }
 
   handleRegister = () => {
-    const { 
+    const {
+      regFirstName,
+      regLastName,   
       regEmail,
-      regPwd 
-    } = this.state
-    console.log("[DEBUG]: Register Button")
-    
+      regPwd,
+      regCnfrmPwd,
+      regAddress,
+    } = this.state 
+    const {
+      registerConnect
+    } = this.props
+    console.log("[DEBUG]: Handle register")
+    const body = {
+      'firstname': regFirstName,
+      'regLastName': regLastName,
+      'regEmail': regEmail,
+      'regPwd': regPwd, 
+      'regAddress': regAddress
+    }
+    registerConnect(body)
+
   }
 
 
   render(){
-    const { 
+    const {
+      showRegister,
       postCode,
       postCodeErr,
+      regFirstName,
+      regLastName,      
       regEmail,
-      showRegister,
-      regPwd
+      regPwd,
+      regCnfrmPwd,
+      regAddress
     } = this.state  
-
     if(showRegister) {
       return(
         <div className = {styles.modal}>
           <form className = {styles.regForm}>
+            <TextField
+              className={styles.regFirstName}
+              type="name"
+              placeholder="First Name"
+              value={regFirstName}
+              onChange={value => this.handleChange('regFirstName', value)}
+            />
+            <TextField
+              className={styles.regLastName}
+              type="name"
+              placeholder="Last Name"
+              value={regLastName}
+              onChange={value => this.handleChange('regLastName', value)}
+            />
             <TextField
               className={styles.regEmail}
               placeholder="Email"
@@ -75,15 +116,26 @@ class RegisterModal extends Component{
             />
             <TextField
               className={styles.regPwd}
-              type="password"
               placeholder="Password"
               value={regPwd}
               onChange={value => this.handleChange('regPwd', value)}
             />
+            <TextField
+              className={styles.regCnfrmPwd}
+              placeholder="Password"
+              value={regCnfrmPwd}
+              onChange={value => this.handleChange('regCnfrmPwd', value)}
+            />
+            <TextField
+              className={styles.regAddress}
+              placeholder="246 Example Hwy, Burwood NSW"
+              value={regAddress}
+              onChange={value => this.handleChange('regAddress', value)}
+            />
 
             <Button
               className={styles.sbmtButton}
-              type="submit"
+              type="button"
               onClick={this.handleRegister}
             > 
               Register
@@ -116,4 +168,12 @@ class RegisterModal extends Component{
   }
 }
 
-export default RegisterModal
+const mapStateToProps = state => ({
+
+})
+
+const mapDispatchToProps = {
+  registerConnect: register,
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(RegisterModal)
