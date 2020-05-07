@@ -9,27 +9,27 @@ const calculateOrderAmount = items => {
 };
 
 // Get
-// OrderController.createPaymentIntent = async (req, res) => {
-//   console.log('[DEBUG]: create payment intent has been called')
-//   // Create a PaymentIntent with the order amount and currency
-//   const paymentIntent = await stripe.paymentIntents.create({
-//     amount: calculateOrderAmount(1400),
-//     currency: 'aud',
-//     metadata: { integration_check: 'accept_a_payment' }
-//   })
+OrderController.createPaymentIntent = async (req, res) => {
+  console.log('[DEBUG]: create payment intent has been called')
+  // Create a PaymentIntent with the order amount and currency
+  const paymentIntent = await stripe.paymentIntents.create({
+    amount: calculateOrderAmount(1400),
+    currency: 'aud',
+    metadata: { integration_check: 'accept_a_payment' }
+  })
 
-//   console.log(paymentIntent)
+  console.log(paymentIntent)
 
-//   // Send publishable key and PaymentIntent details to client
-//   res.send({
-//     id: paymentIntent.id
-//   })
-// }
+  // Send publishable key and PaymentIntent details to client
+  res.send({
+    id: paymentIntent.id
+  })
+}
 
 OrderController.pay = async (req, res) => {
   const { paymentMethodId, paymentIntentId, items, currency, useStripeSdk } = req.body;
 
-  const orderAmount = calculateOrderAmount(items);
+  const orderAmount = calculateOrderAmount(items)
 
   try {
     let intent;
@@ -80,8 +80,8 @@ const generateResponse = intent => {
     case "succeeded":
       // Payment is complete, authentication not required
       // To cancel the payment after capture you will need to issue a Refund (https://stripe.com/docs/api/refunds)
-      console.log("💰 Payment received!");
-      return { clientSecret: intent.client_secret };
+      console.log("💰 Payment received!")
+      return { clientSecret: intent.client_secret }
   }
 };
 

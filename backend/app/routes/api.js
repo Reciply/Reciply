@@ -5,10 +5,12 @@
 // we can think of it as a 'mini-application'
 // The top-level express object has a Router() method that creates a new router object
 // Once you’ve created a router object, you can add middleware and HTTP method routes (such as get, put, post, and so on) to it just like an application. 
-var router = require('express').Router();
-var config = require('../config');
-var AuthController = require('../controllers/authController');
+var router = require('express').Router()
+var config = require('../config')
+var AuthController = require('../controllers/authController')
 var OrderController = require('../controllers/orderController')
+
+//router.use(cors())
 
 // accept passport instance as input
 var APIRoutes = function(passport) {
@@ -21,7 +23,7 @@ var APIRoutes = function(passport) {
 
   // test to access resouce with assigned JWT
   router.post('/profile', passport.authenticate('jwt', { session: false }), function (req, res) {
-    res.status(201).json({ message: 'here is you profile!' });
+    res.status(201).json({ message: 'here is you profile!' })
   })
 
   // ============ Order endpoints ============ //

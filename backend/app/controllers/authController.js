@@ -10,6 +10,7 @@ var AuthController = {};
 
 // implement the 'register a user' logic
 AuthController.signUp = function (req, res) {
+  console.log('[DEBUG]: register')
   if (!req.body.firstname || !req.body.lastname || !req.body.email || !req.body.password || !req.body.address) {
     res.json({ message: 'Please provide complete information before submit.' })
   } else {
@@ -36,6 +37,7 @@ AuthController.signUp = function (req, res) {
 
 // implement the 'user login' logic
 AuthController.authenticateUser = function (req, res) {
+  console.log('[DEBUG]: authenticateUser')
   if(!req.body.email || !req.body.password){
     res.status(404).json({message: 'Email and password are needed!'});
   } else{
@@ -52,13 +54,13 @@ AuthController.authenticateUser = function (req, res) {
                 }else if(!result){
                     res.status(401).json({message: 'Authentication failed! Password is incorrect!'});
                 }else{
-                    // the generated token is a string
-                    var token = jwt.sign(
-                        {email: user.email}, // this line is the payload
-                        config.keys.secret,
-                        {expiresIn: '30m'}
-                    );
-                    res.json({success: true, token: 'JWT' + token});
+                  // the generated token is a string
+                  var token = jwt.sign(
+                    {email: user.email}, // this line is the payload
+                    config.keys.secret,
+                    {expiresIn: '30m'}
+                  );
+                  res.json({success: true, token: 'JWT' + token});
                 }
             })
         }

@@ -1,5 +1,8 @@
 import React, { Component } from 'react'
-
+import { connect } from 'react-redux'
+import {
+  login
+} from '../../state/ducks/users/actions'
 import Button from '../../elements/button'
 import TextField from '../../elements/textfield'
 
@@ -19,7 +22,30 @@ class LoginModal extends Component{
     this.setState({
       [name]: value,
     })
-  } 
+  }
+
+  handleLogin = () => {
+    console.log("[DEBUG]: handleLogin")
+    const { 
+      loginEmail,
+      loginPassword
+    } = this.state
+
+    const {
+      loginConnect
+    } = this.props
+    
+    //TODO: Validate login details
+
+    //create an object called body with email and passwords
+    const body = {
+      'email': loginEmail,
+      'password': loginPassword
+    }
+
+    //Login requests
+    loginConnect(body)
+  }
 
   render(){
     const { 
@@ -43,12 +69,19 @@ class LoginModal extends Component{
             value={loginPassword}
             onChange={value => this.handleChange('loginPassword', value)}
           />
-
-          <Button className={styles.loginBtn}>Login</Button>
+          <Button className={styles.loginBtn} onClick={this.handleLogin}>Login</Button>
         </form> 
       </div>
     )
   }
 }
 
-export default LoginModal
+const mapStateToProps = state => ({
+
+})
+
+const mapDispatchToProps = {
+  loginConnect: login,
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(LoginModal)

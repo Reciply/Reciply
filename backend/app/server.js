@@ -5,7 +5,7 @@
 // 1: import NPM dependencies (modules)
 var express = require('express')
 var bodyParser = require('body-parser')
-var cors = require("cors")
+var cors = require('cors')
 require('dotenv').config()
 var sequelize = require('sequelize')
 var passport = require('passport')

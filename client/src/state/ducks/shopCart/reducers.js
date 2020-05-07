@@ -26,8 +26,8 @@ const reducer = (state = initialState, action) => {
             newCartItem.amount += 1
             newTotal = parseFloat(newTotal) + parseFloat(cartItem.productPrice)
             return newCartItem
-          } 
-          // Leave item unchanged 
+          }
+          // Leave item unchanged
           return cartItem
         })
         return {
@@ -94,11 +94,10 @@ const reducer = (state = initialState, action) => {
         }
       }
     }
+      break
     default:
     return state
   }
 }
-
-
 
 export default reducer

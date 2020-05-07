@@ -5,9 +5,6 @@ import { connect } from 'react-redux'
 import styles from './OrderSummary.css'
 
 class OrderSummary extends Component {
-  // constructor (props) {
-  //   super(props)
-  // }
 
   render () {
     const {
@@ -19,7 +16,7 @@ class OrderSummary extends Component {
         <div className={styles.orderSummary}>
           <Button className={styles.confirm}> Confirm Order </Button>
           <div>
-            {cart.map((value, index) => { 
+            {cart.map((value, index) => {
               return (<div key={index}>somethings</div>)
             })}
           </div>
