@@ -6,8 +6,8 @@
 var config = module.exports
 
 config.db = {
-  user: 'root',
-  password: 'HANliu1219',
+  user: 'admin',
+  password: 'reciply',
   db_name: 'reciply_db'
 }
 
