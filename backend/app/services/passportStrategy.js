@@ -10,7 +10,7 @@ const config = require('./../config');
 
 /**
  * This function works as middleware at server.js to authenticate upcoming request's JWT so to keep client logged in.
- * Th options below is to tell passport:
+ * The options below is to tell passport:
  * 1) in requests, where to extract encrypted JWT;
  * 2) use what 'secret' to decrypt out the JWT;
  * 3) in the database table - User, make a query to check if username exists in the table

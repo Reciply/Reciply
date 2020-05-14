@@ -6,7 +6,7 @@
 // The top-level express object has a Router() method that creates a new router object
 // Once you’ve created a router object, you can add middleware and HTTP method routes (such as get, put, post, and so on) to it just like an application.
 const router = require('express').Router();
-const config = require('../config');
+// const config = require('../config');
 const AuthController = require('../controllers/authController');
 const OrderController = require('../controllers/orderController');
 

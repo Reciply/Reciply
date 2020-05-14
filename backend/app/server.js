@@ -9,10 +9,10 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 require('dotenv').config();
-const sequelize = require('sequelize');
+// const sequelize = require('sequelize');
 const passport = require('passport');
-const jwt = require('jsonwebtoken');
-const path = require('path');
+// const jwt = require('jsonwebtoken');
+// const path = require('path');
 
 const hookJWTStrategy = require('./services/passportStrategy'); // passport
 

@@ -15,7 +15,7 @@ AuthController.signUp = function(req, res) {
   if (!req.body.firstname || !req.body.lastname || !req.body.email || !req.body.password || !req.body.address) {
     res.json({message: 'Please provide complete information before submit.'});
   } else {
-    db.sync().then(function() {
+    db.sync({alter: true}).then(function() { // newly added
       const newUser = {
         firstname: req.body.firstname,
         lastname: req.body.lastname,
