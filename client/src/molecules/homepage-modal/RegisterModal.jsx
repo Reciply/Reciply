@@ -68,10 +68,10 @@ class RegisterModal extends Component{
     console.log("[DEBUG]: Handle register")
     const body = {
       'firstname': regFirstName,
-      'regLastName': regLastName,
-      'regEmail': regEmail,
-      'regPwd': regPwd, 
-      'regAddress': regAddress
+      'lastname': regLastName,
+      'email': regEmail,
+      'password': regPwd, 
+      'address': regAddress
     }
     registerConnect(body)
 
@@ -117,12 +117,14 @@ class RegisterModal extends Component{
             <TextField
               className={styles.regPwd}
               placeholder="Password"
+              type="password"
               value={regPwd}
               onChange={value => this.handleChange('regPwd', value)}
             />
             <TextField
               className={styles.regCnfrmPwd}
               placeholder="Password"
+              type="password"
               value={regCnfrmPwd}
               onChange={value => this.handleChange('regCnfrmPwd', value)}
             />

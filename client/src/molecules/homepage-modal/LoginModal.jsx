@@ -13,8 +13,8 @@ class LoginModal extends Component{
   constructor(props){
     super(props);
     this.state = {
-      loginEmail: '',
-      loginPassword: ''
+      loginEmail: 'test@test.com',
+      loginPassword: 'password'
     }
   }
 
@@ -24,7 +24,7 @@ class LoginModal extends Component{
     })
   }
 
-  handleLogin = () => {
+  handleLogin = async () => {
     console.log("[DEBUG]: handleLogin")
     const { 
       loginEmail,
@@ -38,13 +38,33 @@ class LoginModal extends Component{
     //TODO: Validate login details
 
     //create an object called body with email and passwords
-    const body = {
+    const values = {
       'email': loginEmail,
       'password': loginPassword
     }
-
+    const message = loginConnect(values)
     //Login requests
-    loginConnect(body)
+    // const promise = new Promise((resolve, reject) => {
+    //   loginConnect(values, resolve, reject)
+    // })
+    // promise.then(() =>{
+    //   console.log('success')
+    // })
+    // .catch(() => {
+    //   console.log('fail')
+    //   //TODO: error message
+    // })
+    //loginConnect()).then(() => console.log('[DEBUG]: success'))
+    // let message = await loginConnect(values)
+    // console.log('[DEBUG]: message - ' + message)
+    // console.log("mesage: " + message)
+    // if (message === 'success'){
+    //   console.log('success')
+    //   history.push('/products')
+    // } else {
+    //   console.log('error')
+    // }
+
   }
 
   render(){

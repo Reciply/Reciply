@@ -9,6 +9,7 @@ import HomePage from './pages/homepage/HomePage';
 import ProductPage from './pages/productpage/ProductPage';
 import OrderPage from './pages/orderpage/OrderPage';
 import ProfilePage from './pages/profilepage/ProfilePage'
+import history from './history'
 
 import styles from './App.css';
 
@@ -16,7 +17,7 @@ function App(){
   return(
     <div className={styles.App} id="app">
       <Provider store={store}>
-        <Router>
+        <Router history={history}>
           <Switch>
             <Route exact path="/">
               <HomePage />

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-import { Elements } from '@stripe/react-stripe-js'
+import { Elements } from "@stripe/react-stripe-js"
 import { loadStripe } from '@stripe/stripe-js'
 import CheckoutForm from '../../molecules/checkout-form'
 import OrderSummary from '../../molecules/order-summary/OrderSummary'
@@ -15,9 +15,11 @@ class OrderPage extends Component {
     return (
       <div>
         <div className={styles.deliveryForm}>
+          <form>
           <Elements stripe={stripePromise}>
             <CheckoutForm/>
           </Elements>
+          </form>
         </div>
         <div>
           <OrderSummary/>

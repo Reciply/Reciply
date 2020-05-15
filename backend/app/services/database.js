@@ -1,10 +1,10 @@
 // locates at Reciply_User_Auth/app/services/databse.js
 // this file is especially designed for interacting with 'sequelize'
 
-'use strict'
+"use strict";
 
-var config = require('./../config')
-var Sequelize = require('sequelize')
+var config = require("./../config");
+var Sequelize = require("sequelize");
 
 // instantiate before using 'sequelize'
 module.exports = new Sequelize(
@@ -12,4 +12,4 @@ module.exports = new Sequelize(
   config.db.user,
   config.db.password,
   config.db.details
-)
+);

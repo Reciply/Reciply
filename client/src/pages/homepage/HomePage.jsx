@@ -1,9 +1,7 @@
 import React, { Component } from 'react'
 
 import HomePageModal  from '../../molecules/homepage-modal'
-import RegisterModal from '../../molecules/homepage-modal/RegisterModal'
 import Button from '../../elements/button'
-import ShopCart from '../../molecules/shop-cart'
 
 import styles from './HomePage.css'
 
