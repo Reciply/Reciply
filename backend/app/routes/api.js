@@ -9,6 +9,7 @@ const router = require('express').Router();
 // const config = require('../config');
 const AuthController = require('../controllers/authController');
 const OrderController = require('../controllers/orderController');
+const orderSaving = require('../controllers/orderSaving');
 
 // router.use(cors())
 
@@ -29,6 +30,9 @@ const APIRoutes = function(passport) {
   // ============ Order endpoints ============ //
   router.get('/create-payment-intent', OrderController.createPaymentIntent);
   router.post('/pay', OrderController.pay);
+
+  // save order into Table "orders" in database
+  router.post('/save-order', orderSaving.saveOrder);
 
   return router; // a middleware used in server.js
 };
