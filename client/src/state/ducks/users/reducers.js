@@ -5,6 +5,7 @@ import {
 } from './types'
 
 const initialState = {
+  isFetched: false,
   firstname: '',
   lastname: '',
   email: '',
@@ -19,12 +20,15 @@ const reducer = (state = initialState, action) => {
     case LOGIN: {
       console.log("[DEBUG]: REDUCER LOGIN")
       console.log(action.payload)
-      return {
-        ...state,
-        firstname: action.payload.firstname,
-        lastname: action.payload.lastname,
-        address: action.payload.address,
-        token: action.payload.token
+      if (action.status === 'success'){
+        return {
+          ...state,
+          isFetched: true,
+          firstname: action.payload.firstname,
+          lastname: action.payload.lastname,
+          address: action.payload.address,
+          token: action.payload.token
+        }
       }
     }
     case LOGOUT: {

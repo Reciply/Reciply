@@ -19,17 +19,30 @@ export const login = params => (dispatch) => {
     },
     body: JSON.stringify(params)
   })
-  .then((res) => res.json())
+  .then((res) => {
+    if (res.status === 200){
+      return res.json()
+    } else if (res.status === 404){
+      dispatch({type: LOGIN, status: 'fail'})
+    }
+  })
     .then((data) => {
+      console.log('[DEBUG]: data')
+      console.log(data)
       dispatch({
         type: LOGIN,
         status: 'success',
         payload: data
       })
-      return { message: 'success'}
     
     })
-    .catch((err) => console.log(err))
+    .catch((err) => {
+      console.log(err)
+      dispatch({
+        type: LOGIN,
+        status: 'fail'
+      })
+    })
   
 
 }

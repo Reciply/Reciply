@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 import {
   register
 } from '../../state/ducks/users/actions'
-
 import TextField from '../../elements/textfield'
 import Button from '../../elements/button'
 
@@ -89,7 +88,7 @@ class RegisterModal extends Component{
       regPwd,
       regCnfrmPwd,
       regAddress
-    } = this.state  
+    } = this.state
     if(showRegister) {
       return(
         <div className = {styles.modal}>
@@ -171,7 +170,6 @@ class RegisterModal extends Component{
 }
 
 const mapStateToProps = state => ({
-
 })
 
 const mapDispatchToProps = {
