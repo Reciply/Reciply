@@ -1,20 +1,30 @@
 import React, { Component } from 'react'
 
 import { connect } from 'react-redux'
-import {
-  getProducts
-} from '../../state/ducks/products/actions'
 
 import ProductList from '../../molecules/product-list'
 import ProductController from '../../molecules/product-controller'
 import ShopCart from '../../molecules/shop-cart'
+import TopNav from '../../molecules/top-nav'
+
+
+import { Redirect } from 'react-router-dom'
 
 import styles from './ProductPage.css'
 
 class ProductPage extends Component {
   render () {
+    const {
+      loggedIn    
+    } = this.props
+    console.log('DEBUG ' + loggedIn)
+    if(!loggedIn){
+      console.log('Redirect')
+      return <Redirect to={'/'}/>
+    }
     return (
       <div className={styles.page}>
+        <TopNav/>
         <ProductController/>
         <div className={styles.main}>
           <ProductList/>
@@ -26,16 +36,10 @@ class ProductPage extends Component {
 }
 
 const mapStateToProps = state => ({
-  currPage: state.products.currPage,
-  totalPages: state.products.totalPages,
-  productsList: state.products.productsList,
-  searchFor: state.products.searchFor,
-  byCategory: state.products.byCategory,
-  categories: state.products.categories
+  loggedIn: state.users.isFetched
 })
 
 const mapDispatchToProps = {
-  getProductsConnect: getProducts
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProductPage)

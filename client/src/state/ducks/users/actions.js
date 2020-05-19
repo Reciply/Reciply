@@ -5,13 +5,6 @@ import {
 } from './types'
 
 export const login = params => (dispatch) => {
-  // const {
-  //   email,
-  //   password
-  // } = params.body
-  console.log("[DEBUG]: Login action")
-  console.log(params)
-  // console.log(password)
   fetch('http://localhost:4000/api/login', {
     method: 'POST',
     headers: {
@@ -37,7 +30,6 @@ export const login = params => (dispatch) => {
     
     })
     .catch((err) => {
-      console.log(err)
       dispatch({
         type: LOGIN,
         status: 'fail'

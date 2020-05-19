@@ -32,8 +32,16 @@ const reducer = (state = initialState, action) => {
       }
     }
     case LOGOUT: {
-      console.log("[DEBUG]: REDUCER LOGOUT")
-      return state
+      //reset everything to initialState
+      return {
+        isFetched: false,
+        firstname: '',
+        lastname: '',
+        email: '',
+        password: '',
+        address: '',
+        jwt: '',
+      }
     }
     case REGISTER:{
       console.log("DEBUG: REDUCER REGISTER")

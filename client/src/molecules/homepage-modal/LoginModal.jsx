@@ -28,7 +28,7 @@ class LoginModal extends Component{
 
 
 
-  handleLogin = async () => {
+  handleLogin = () => {
     console.log("[DEBUG]: handleLogin")
     const { 
       loginEmail,
@@ -46,29 +46,8 @@ class LoginModal extends Component{
       'email': loginEmail,
       'password': loginPassword
     }
-    const message = loginConnect(values)
-    //Login requests
-    // const promise = new Promise((resolve, reject) => {
-    //   loginConnect(values, resolve, reject)
-    // })
-    // promise.then(() =>{
-    //   console.log('success')
-    // })
-    // .catch(() => {
-    //   console.log('fail')
-    //   //TODO: error message
-    // })
-    //loginConnect()).then(() => console.log('[DEBUG]: success'))
-    // let message = await loginConnect(values)
-    // console.log('[DEBUG]: message - ' + message)
-    // console.log("mesage: " + message)
-    // if (message === 'success'){
-    //   console.log('success')
-    //   history.push('/products')
-    // } else {
-    //   console.log('error')
-    // }
 
+    loginConnect(values)
   }
 
   render(){
@@ -79,8 +58,8 @@ class LoginModal extends Component{
 
     const {
       loggedIn 
-    } = this.props 
-    console.log('loggedIn' + loggedIn)
+    } = this.props
+    
     if (loggedIn) {
       return <Redirect to={'/products'} />
     }
