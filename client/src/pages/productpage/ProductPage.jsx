@@ -6,8 +6,6 @@ import ProductList from '../../molecules/product-list'
 import ProductController from '../../molecules/product-controller'
 import ShopCart from '../../molecules/shop-cart'
 import TopNav from '../../molecules/top-nav'
-
-
 import { Redirect } from 'react-router-dom'
 
 import styles from './ProductPage.css'
@@ -17,11 +15,9 @@ class ProductPage extends Component {
     const {
       loggedIn    
     } = this.props
-    console.log('DEBUG ' + loggedIn)
-    if(!loggedIn){
-      console.log('Redirect')
-      return <Redirect to={'/'}/>
-    }
+
+    if(!loggedIn) return <Redirect to={'/'}/>
+  
     return (
       <div className={styles.page}>
         <TopNav/>
