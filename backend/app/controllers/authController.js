@@ -6,7 +6,7 @@ var config = require("../config");
 var db = require("../services/database"); // a sequelize instance
 var User = require("../models/user");
 
-var AuthController = {};
+const AuthController = {};
 
 // implement the 'register a user' logic
 AuthController.signUp = function (req, res) {
