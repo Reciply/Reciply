@@ -87,13 +87,42 @@ const wooliesList = [
   }
 ];
 
+const search = {};
 
 /**
  * To search all available Woolworths supermarkets within Wollongong under a given zipcode.
- * @param {Integer} zipcode the postcode provided by a customer
- * @return {Array} an array of objects, each of which is a found Woolworths supermarket.
+ * @param {object} req req.bodythe postcode provided by a customer
+ * @param {object} res return result of search
+ * @return {undefined}
  */
-module.exports = function(zipcode) {
+search.searchWoolies = function(req, res) {
+  console.log('[DEBUG]: searchWoolies');
+
+  if (!req.body.postcode) {
+    console.log(new Error('The input postcode is empty!'));
+  } else {
+    const result = []; // array
+    let woolies;
+    let i = 0;
+    for (woolies of wooliesList) {
+      if (woolies.zipcode == req.body.postcode) {
+        const found = {};
+        found.name = woolies.name;
+        found.address = woolies.formatted_address;
+        result.push(found);
+        i = i + 1;
+      }
+    }
+    if (i == 0) {
+      res.status(404).json('There is no available Woolworths found!');
+    } else {
+      res.status(202).send(result);
+    }
+  }
+};
+
+/*
+search.searchWoolies = function(zipcode) {
   const result = []; // array
   let woolies;
   for (woolies of wooliesList) {
@@ -106,3 +135,6 @@ module.exports = function(zipcode) {
   }
   return result;
 };
+*/
+
+module.exports = search;
