@@ -10,6 +10,7 @@ const router = require('express').Router();
 const AuthController = require('../controllers/authController');
 const OrderController = require('../controllers/orderController');
 const orderSaving = require('../controllers/orderSaving');
+const searchPostcode = require('../services/findNearbyWoolies/searchWooliesInWollongong');
 
 // router.use(cors())
 
@@ -33,6 +34,8 @@ const APIRoutes = function(passport) {
 
   // save order into Table "orders" in database
   router.post('/save-order', orderSaving.saveOrder);
+  // create an endpoint for searchiong nnearby woolies withi Wollongong area according to postcode
+  router.get('/search-woolies', searchPostcode.searchWoolies);
 
   return router; // a middleware used in server.js
 };
