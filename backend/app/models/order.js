@@ -38,7 +38,7 @@ const OrderModel = db.define('order', modelDefinition, modelOptions);
 
 // set up foreign key
 OrderModel.associate = function(models) {
-  console.log('[DEBUG]: create foreign key');
+  // console.log('[DEBUG]: create foreign key');
   OrderModel.belongsTo(models.user, {foreignKey: 'userEmail'});
 };
 

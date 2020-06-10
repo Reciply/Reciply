@@ -25,3 +25,6 @@ coverage
 
 # Benchmarking
 benchmarks/graphs
+
+# ignore testing files
+test_1.js
