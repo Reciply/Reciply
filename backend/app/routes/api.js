@@ -33,7 +33,7 @@ const APIRoutes = function(passport) {
   router.post('/pay', OrderController.pay);
 
   // save order into Table "orders" in database
-  router.post('/save-order', orderSaving.saveOrder);
+  router.post('/save-order', orderSaving.saveOrder); // add one more function of sending email
   // create an endpoint for searchiong nnearby woolies withi Wollongong area according to postcode
   router.get('/search-woolies', searchPostcode.searchWoolies);
 
