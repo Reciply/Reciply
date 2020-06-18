@@ -1,28 +1,38 @@
-const stripe = require("stripe")(process.env.STRIPE_KEY);
+const stripe = require("stripe")('sk_test_o0bGBiHFKdDeg6ZsiqqDXKK000PNnFMZkk'); //FIXME: put in process env
 
 var OrderController = {};
 // Helper function for calculating items
 const calculateOrderAmount = (items) => {
   // TODO: Replace this constant with a calculation of the order's amount
-
-  return 1400;
+  console.log(items)
+  total = 0 
+  for (item = 0; item < items.length; item++) { 
+    total += parseFloat(items[item].productPrice) * parseFloat(items[item].amount)
+  }
+  return total * 100;//convert to cents because stripe only uses cents
 };
 
-// Get
+// POST
 OrderController.createPaymentIntent = async (req, res) => {
   console.log("[DEBUG]: create payment intent has been called");
+//  console.log(req.body)
+  const {
+    cart
+  } = req.body
+
   // Create a PaymentIntent with the order amount and currency
   const paymentIntent = await stripe.paymentIntents.create({
-    amount: calculateOrderAmount(1400),
+    amount: calculateOrderAmount(cart),
     currency: "aud",
     metadata: { integration_check: "accept_a_payment" },
-  });
+  }).catch((err) => err);
 
-  console.log(paymentIntent);
+  console.log(paymentIntent)
 
-  // Send publishable key and PaymentIntent details to client
+  // // Send publishable key and PaymentIntent details to client
   res.send({
     id: paymentIntent.id,
+    clientSecret: paymentIntent.client_secret
   });
 };
 

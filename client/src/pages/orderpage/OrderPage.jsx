@@ -6,6 +6,7 @@ import { loadStripe } from '@stripe/stripe-js'
 import CheckoutForm from '../../molecules/checkout-form'
 import OrderSummary from '../../molecules/order-summary/OrderSummary'
 
+
 import { Redirect } from 'react-router-dom'
 import TopNav from '../../molecules/top-nav'
 
@@ -16,6 +17,7 @@ import styles from './OrderPage.css'
 const stripePromise = loadStripe('pk_test_bs9gcFqzGQn9v5FyDlPL3sVu00DK7P3kyz')
 
 class OrderPage extends Component {
+
   render () {
     const {
       loggedIn    
@@ -29,11 +31,11 @@ class OrderPage extends Component {
       <div>
         <TopNav/>
         <div className={styles.deliveryForm}>
-          <form>
+          <div>
           <Elements stripe={stripePromise}>
             <CheckoutForm/>
           </Elements>
-          </form>
+          </div>
         </div>
         <div>
           <OrderSummary/>

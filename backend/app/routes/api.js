@@ -28,7 +28,7 @@ const APIRoutes = function(passport) {
   });
 
   // ============ Order endpoints ============ //
-  router.get('/create-payment-intent', OrderController.createPaymentIntent);
+  router.post('/create-payment-intent', OrderController.createPaymentIntent);
   router.post('/pay', OrderController.pay);
 
   // save order into Table "orders" in database

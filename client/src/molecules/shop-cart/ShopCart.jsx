@@ -58,8 +58,8 @@ class ShopCart extends Component{
           </h3>
           <div>
             <p>
-              Disclaimer stuff and some links to some disclaimer as well as some privacy policies
-              I am just filling all this up to see how good it looks like. Lorem ipsum blah blah 
+              <b>*NOTE*</b>
+              Delivery fee is added to the price.
             </p>
           </div>
         </div>

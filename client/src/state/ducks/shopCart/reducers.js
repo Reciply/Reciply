@@ -1,6 +1,7 @@
 import {
   ADD_TO_CART,
-  REMOVE_FROM_CART
+  REMOVE_FROM_CART,
+  CONFIRM_ORDER
 } from './types'
 
 const initialState = {
@@ -93,6 +94,10 @@ const reducer = (state = initialState, action) => {
           cart: [...newCart]
         }
       }
+    }
+
+    case CONFIRM_ORDER:{
+      console.log('[DEBUG]: confirm order')
     }
       break
     default:
