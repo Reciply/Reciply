@@ -28,3 +28,6 @@ benchmarks/graphs
 # ignore testing files
 test_1.js
 test_googleMaps.js
+
+# ignore sendgrid API key
+sendgrid.env
