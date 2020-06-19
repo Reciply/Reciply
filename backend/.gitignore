@@ -18,7 +18,6 @@ node_modules
 package-lock.json
 *.log
 *.gz
-config.js
 
 # Coveralls
 coverage
@@ -28,3 +27,4 @@ benchmarks/graphs
 
 # ignore testing files
 test_1.js
+test_googleMaps.js
