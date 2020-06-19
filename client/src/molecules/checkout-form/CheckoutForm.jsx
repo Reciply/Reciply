@@ -15,15 +15,17 @@ import CardSection from '../card-section'
 import TextField from '../../elements/textfield'
 import Button from '../../elements/button'
 
+import { saveOrder } from '../../api/OrderAPI'
+
 import styles from './CheckoutForm.css'
 
 class CheckoutForm extends React.Component {
   constructor(props){
     super(props)
     this.state = {
-      deliveryAddress: '',
-      deliveryInstructions: '',
-      mobileNumber: '',
+      deliveryAddress: '56 Chapel Street',
+      deliveryInstructions: 'Knock the door and leave it at the door thanks',
+      mobileNumber: '0490754907',
     }
   }
 
@@ -44,13 +46,20 @@ class CheckoutForm extends React.Component {
       cart,
       firstname,
       lastname,
+      email,
       jwt
     } = this.props;
 
-    
-    console.log(this.props)
-    console.log(cart)
-    console.log(firstname)
+    const {
+      deliveryInstructions,
+      deliveryAddress,
+      mobileNumber,
+    } = this.state
+
+    //TODO: check if empty 
+    console.log(email)
+   
+   // return //TODO: remove this  later 
 
     if (!stripe || !elements) {
       // Stripe.js has not loaded yet. Make sure to disable
@@ -97,6 +106,14 @@ class CheckoutForm extends React.Component {
         // execution. Set up a webhook or plugin to listen for the
         // payment_intent.succeeded event that handles any business critical
         // post-payment actions.
+        saveOrder({
+          'name':`${firstname} ${lastname}`,
+          'address': deliveryAddress,
+          'email': email,
+          'instructions': deliveryInstructions,
+          'mobileNumber': mobileNumber,
+          'items': cart.map((item) => {return {'name':item.productName, 'price': item.productPrice, 'amount': item.amount}})
+        })
       }
     }
   };
@@ -166,7 +183,8 @@ const mapStateToProps = state => ({
   jwt: state.users.token,
   firstname: state.users.firstname,
   lastname: state.users.lastname,
-  cart: state.shopCart.cart
+  cart: state.shopCart.cart,
+  email: state.users.email,
 })
 
 const mapDispatchToProps = {

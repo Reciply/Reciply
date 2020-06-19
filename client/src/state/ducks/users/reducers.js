@@ -24,6 +24,7 @@ const reducer = (state = initialState, action) => {
         return {
           ...state,
           isFetched: true,
+          email: action.payload.email,
           firstname: action.payload.firstname,
           lastname: action.payload.lastname,
           address: action.payload.address,

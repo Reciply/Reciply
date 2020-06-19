@@ -25,7 +25,7 @@ export const login = params => (dispatch) => {
       dispatch({
         type: LOGIN,
         status: 'success',
-        payload: data
+        payload: {...data, 'email': params.email}
       })
     
     })

@@ -11,3 +11,17 @@ export const createPaymentIntent = (resolve) => {
     })
     .catch((err) => console.log(err))
 }
+
+export const saveOrder = (payload) =>{
+  console.log('[DEBUG] saveOrder')
+  console.log(payload)
+  fetch('http://localhost:4000/api/save-order', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(payload)
+  })
+  .then((res) => console.log(res))
+  .catch((err) => console.log(err)) 
+}
