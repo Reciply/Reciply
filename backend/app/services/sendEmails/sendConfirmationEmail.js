@@ -12,7 +12,7 @@ sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
 
 /**
- * To search all available Woolworths supermarkets within Wollongong under a given zipcode.
+ * To send order confirmation email to customer after the order is paid by the customer
  * @param {object} req req.body.orderID the postcode provided by a customer,
  *                     which is an integer starting from 1.
  * @param {object} res return notification of if sending emails successully
