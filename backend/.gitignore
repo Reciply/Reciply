@@ -31,3 +31,4 @@ test_googleMaps.js
 
 # ignore sendgrid API key
 sendgrid.env
+test_sendConfirmationEmail.js

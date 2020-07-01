@@ -11,6 +11,7 @@ const AuthController = require('../controllers/authController');
 const OrderController = require('../controllers/orderController');
 const orderSaving = require('../controllers/orderSaving');
 const searchPostcode = require('../services/findNearbyWoolies/searchWooliesInWollongong');
+const sendConfirmationEmail = require('../services/sendEmails/sendConfirmationEmail');
 
 // router.use(cors())
 
@@ -33,9 +34,12 @@ const APIRoutes = function(passport) {
   router.post('/pay', OrderController.pay);
 
   // save order into Table "orders" in database
-  router.post('/save-order', orderSaving.saveOrder); // add one more function of sending email
+  router.post('/save-order', orderSaving.saveOrder); // add one more function of sending notification email
   // create an endpoint for searchiong nnearby woolies withi Wollongong area according to postcode
   router.get('/search-woolies', searchPostcode.searchWoolies);
+
+  // send order confirmation email to customer
+  router.post('/send-email-confirmation', sendConfirmationEmail);
 
   return router; // a middleware used in server.js
 };
