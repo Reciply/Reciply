@@ -1,3 +1,4 @@
+/*
 const sgMail = require('@sendgrid/mail');
 
 // sgMail.setApiKey(process.env.SENDGRID_API_KEY);
@@ -25,3 +26,19 @@ sgMail
           }
         }
     );
+*/
+
+/*
+const txt = '{"name":"John", "age":30, "city":"New York"}';
+const obj = JSON.parse(txt);
+console.log(typeof(obj)); // JavaScript object
+console.log(obj);
+
+const obj1 = {name: 'John', age: 30, city: 'New York'};
+const txt1 = JSON.stringify(obj1);
+console.log(typeof(txt1)); // string with JOSN format
+console.log(txt1);
+*/
+
+const sendEmail = require('./sendConfirmationEmail');
+sendEmail(7);

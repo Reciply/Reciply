@@ -11,9 +11,10 @@ const orderSaving = {};
  * To insert an input order into the table 'Orders' in DB
  * @param {object} req the request object
  * @param {object} res the reponse object
+ * @param {object} next middleware function
  * @return {undefined} result is: Order saved inn DB sccessfully.
  */
-orderSaving.saveOrder = function(req, res) {
+orderSaving.saveOrder = function(req, res, next) {
   console.log('[DEBUG]: saveOrder');
 
   // first check if there are null in critical attributes
@@ -33,6 +34,7 @@ orderSaving.saveOrder = function(req, res) {
           ()=>{
             console.log('Order is saved successfully!');
             res.status(202).json('Order is saved in database successfully!');
+            next();
           },
           (error) => {
             console.log(error);
