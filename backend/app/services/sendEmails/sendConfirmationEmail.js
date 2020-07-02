@@ -59,8 +59,9 @@ const sendConformationEmail = async (req, res) => {
           ${itemsHTML}<br>
           If there is anything wrong with the information above 
           please contact.<br>
-          Mobile: 04410924<br>
-          Email: Rhys@gmail.com<br><br>Please don’t reply to this email.`
+          Mobile: 0435181510<br>
+          Email: rhys.coombes@gmail.com<br><br>
+          Please don’t reply to this email.`
   };
 
   // TODO: send email
