@@ -91,7 +91,7 @@ const search = {};
 
 /**
  * To search all available Woolworths supermarkets within Wollongong under a given zipcode.
- * @param {object} req req.bodythe postcode provided by a customer
+ * @param {object} req req.body.postcode the postcode provided by a customer
  * @param {object} res return result of search
  * @return {undefined}
  */
