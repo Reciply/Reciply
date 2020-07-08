@@ -1,9 +1,6 @@
 import React, { Component } from 'react'
 import Button from '../../elements/button'
 import { connect } from 'react-redux'
-import {
-  confirmOrder
-} from '../../state/ducks/shopCart/actions'
 
 import styles from './OrderSummary.css'
 
@@ -55,8 +52,5 @@ const mapStateToProps = state => ({
   cart: state.shopCart.cart
 })
 
-const mapDispatchToProps = {
-  confirmOrderConnect: confirmOrder
-}
 
-export default connect(mapStateToProps, mapDispatchToProps)(OrderSummary)
+export default connect(mapStateToProps)(OrderSummary)

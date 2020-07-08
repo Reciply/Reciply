@@ -9,6 +9,7 @@ import HomePage from './pages/homepage/HomePage';
 import ProductPage from './pages/productpage/ProductPage';
 import OrderPage from './pages/orderpage/OrderPage';
 import ProfilePage from './pages/profilepage/ProfilePage'
+import Confirmation from './pages/confirmpage/ConfirmPage'
 import history from './history'
 
 import styles from './App.css';
@@ -30,6 +31,9 @@ function App(){
             </Route>
             <Route path="/profile">
               <ProfilePage/>
+            </Route>
+            <Route path="/confirmation">
+              <Confirmation/>
             </Route>
           </Switch>
         </Router>

@@ -14,7 +14,7 @@ export const createPaymentIntent = (resolve) => {
 
 export const saveOrder = (payload) =>{
   console.log('[DEBUG] saveOrder')
-  console.log(payload)
+  //console.log(payload)
   fetch('http://localhost:4000/api/save-order', {
     method: 'POST',
     headers: {

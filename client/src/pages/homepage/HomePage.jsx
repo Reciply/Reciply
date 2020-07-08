@@ -24,9 +24,6 @@ class HomePage extends Component{
     })
   }
 
-
-
-
   render(){    
     //TODO: Remember to do validation
     const {

@@ -2,7 +2,7 @@ import React from 'react'
 import {useStripe, useElements, CardElement, ElementsConsumer} from '@stripe/react-stripe-js'
 import { connect } from 'react-redux'
 import {
-  confirmOrder
+  clearCart
 } from '../../state/ducks/shopCart/actions'
 import { 
   MapPin,
@@ -14,7 +14,7 @@ import {
 import CardSection from '../card-section'
 import TextField from '../../elements/textfield'
 import Button from '../../elements/button'
-
+import { Redirect } from 'react-router-dom'
 import { saveOrder } from '../../api/OrderAPI'
 
 import styles from './CheckoutForm.css'
@@ -26,6 +26,7 @@ class CheckoutForm extends React.Component {
       deliveryAddress: '56 Chapel Street',
       deliveryInstructions: 'Knock the door and leave it at the door thanks',
       mobileNumber: '0490754907',
+      success: false
     }
   }
 
@@ -34,6 +35,7 @@ class CheckoutForm extends React.Component {
       [name]: value,
     })
   }
+
 
   handleSubmit = async (event) => {
     // Block native form submission.
@@ -47,7 +49,8 @@ class CheckoutForm extends React.Component {
       firstname,
       lastname,
       email,
-      jwt
+      jwt,
+      clearCartConnect
     } = this.props;
 
     const {
@@ -114,6 +117,8 @@ class CheckoutForm extends React.Component {
           'mobileNumber': mobileNumber,
           'items': cart.map((item) => {return {'name':item.productName, 'price': item.productPrice, 'amount': item.amount}})
         })
+        clearCartConnect()
+        this.setState({'success': true})
       }
     }
   };
@@ -122,14 +127,13 @@ class CheckoutForm extends React.Component {
     const {
       deliveryAddress,
       deliveryInstructions,
-      mobileNumber
+      mobileNumber,
+      success
     } = this.state
 
-    const{
-      firstname
-    } = this.props
     console.log("[DEBUG]: render checkout form")
-    console.log(firstname)
+
+    if(success) return <Redirect to={'/confirmation'}/>
 
     const {stripe} = this.props;
     return (
@@ -188,7 +192,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = {
-  confirmOrderConnect: confirmOrder,
+  clearCartConnect: clearCart,
 }
 const ConnectedCheckoutForm = connect(mapStateToProps, mapDispatchToProps)(CheckoutForm)
 

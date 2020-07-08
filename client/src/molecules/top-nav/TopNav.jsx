@@ -3,6 +3,9 @@ import { connect } from 'react-redux'
 import {
   logout
 } from '../../state/ducks/users/actions'
+import {
+  clearCart
+} from '../../state/ducks/shopCart/actions'
 
 import Logo from '../../assets/Reciply_Logo.png'
 
@@ -12,12 +15,21 @@ import styles from './TopNav.css'
 
 class TopNav extends Component{
 
+  handleLogout = () =>{
+    const{
+      logoutConnect,
+      clearCartConnect
+    } = this.props
+    //delete token and empty the cart
+    clearCartConnect()
+    logoutConnect() 
+  }
+
  
   render(){
     const {
       firstName,
-      lastName,
-      logoutConnect
+      lastName
     } = this.props
 
     return(
@@ -29,7 +41,7 @@ class TopNav extends Component{
         <div>
           Logged in as:<b> {`${firstName} ${lastName}`} </b>
         </div>
-        <Button onClick={logoutConnect}>
+        <Button onClick={this.handleLogout}>
           Logout
         </Button>
       </div>
@@ -44,6 +56,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
   logoutConnect: logout,
+  clearCartConnect: clearCart
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(TopNav)

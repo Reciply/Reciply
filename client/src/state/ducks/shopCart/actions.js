@@ -1,7 +1,7 @@
 import {
   ADD_TO_CART,
   REMOVE_FROM_CART,
-  CONFIRM_ORDER,
+  CLEAR_CART,
 } from './types'
 
 export const addToCart = params => (dispatch) => {
@@ -25,6 +25,10 @@ export const removeFromCart = params => (dispatch) => {
   })
 }
 
-export const confirmOrder = params => (dispatch) => {
+export const clearCart = params => (dispatch) => {
   console.log("[DEBUG]: action confirmOrder")
+  dispatch({
+    type: CLEAR_CART,
+    status: 'success'
+  })
 }
