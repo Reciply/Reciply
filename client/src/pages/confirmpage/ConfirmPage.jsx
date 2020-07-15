@@ -13,13 +13,20 @@ import TopNav from '../../molecules/top-nav'
 import styles from './ConfirmPage.css'
 
 class ConfirmPage extends Component{
+  // handleLogout = () =>{
+  //   const{
+  //     logoutConnect
+  //   } = this.props
+  //   logoutConnect() 
+  // }
+
   render(){
     const{
       logoutConnect,
       loggedIn
     } = this.props
 
-    if(loggedIn) return <Redirect to={'/'}/>
+    if(!loggedIn) return <Redirect to={'/'}/>
 
     return(
       <div className={styles.page}>
@@ -47,4 +54,4 @@ const mapDispatchToProps = {
 }
 
 
-export default ConfirmPage
+export default connect(mapStateToProps, mapDispatchToProps)(ConfirmPage)

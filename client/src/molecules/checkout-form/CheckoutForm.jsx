@@ -15,7 +15,7 @@ import CardSection from '../card-section'
 import TextField from '../../elements/textfield'
 import Button from '../../elements/button'
 import { Redirect } from 'react-router-dom'
-import { saveOrder } from '../../api/OrderAPI'
+import { saveOrder, sendConfirmEmail } from '../../api/OrderAPI'
 
 import styles from './CheckoutForm.css'
 
@@ -109,14 +109,26 @@ class CheckoutForm extends React.Component {
         // execution. Set up a webhook or plugin to listen for the
         // payment_intent.succeeded event that handles any business critical
         // post-payment actions.
-        saveOrder({
-          'name':`${firstname} ${lastname}`,
-          'address': deliveryAddress,
-          'email': email,
-          'instructions': deliveryInstructions,
-          'mobileNumber': mobileNumber,
-          'items': cart.map((item) => {return {'name':item.productName, 'price': item.productPrice, 'amount': item.amount}})
+        const promise = new Promise((resolve, reject) => {
+          saveOrder({
+            'name':`${firstname} ${lastname}`,
+            'address': deliveryAddress,
+            'email': email,
+            'instructions': deliveryInstructions,
+            'mobileNumber': mobileNumber,
+            'items': cart.map((item) => {return {'name':item.productName, 'price': item.productPrice, 'amount': item.amount}})
+          }, resolve, reject)
         })
+
+        promise.then((res) => {
+          //if response is successful
+          console.log(res)
+          sendConfirmEmail(res.orderId)
+        })
+        .catch(() =>{
+          console.log('something went wrong saving your order')
+        })
+       
         clearCartConnect()
         this.setState({'success': true})
       }

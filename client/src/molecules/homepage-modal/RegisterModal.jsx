@@ -35,8 +35,7 @@ class RegisterModal extends Component{
 
   handlePostCodeCheck = () => {
     const { postCode } = this.state
-
-    this.setState({showRegister: true})
+    if (postCode === '2222') this.setState({showRegister: true})
     // const promise = new Promise((resolve, reject) => {
     //   checkPostCode(postCode, resolve, reject)
     // })

@@ -3,9 +3,8 @@ import {
   LOGOUT,
   REGISTER
 } from './types'
-
 export const login = params => (dispatch) => {
-  fetch('http://localhost:4000/api/login', {
+  fetch(`http://localhost:4000/api/login`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
