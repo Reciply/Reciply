@@ -1,6 +1,7 @@
 import {
   ADD_TO_CART,
-  REMOVE_FROM_CART
+  REMOVE_FROM_CART,
+  CLEAR_CART
 } from './types'
 
 const initialState = {
@@ -92,6 +93,14 @@ const reducer = (state = initialState, action) => {
           totalPrice: newTotal.toFixed(2),
           cart: [...newCart]
         }
+      }
+    }
+
+    case CLEAR_CART:{
+      console.log('[DEBUG]: confirm order')
+      return{
+        totalPrice: parseFloat(0.00),
+        cart: []
       }
     }
       break

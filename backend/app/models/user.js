@@ -15,12 +15,12 @@ const Order = require('./order');
 const modelDefinition = {
   firstname: {
     type: Sequelize.STRING,
-    allowNull: false
+    allowNull: false,
   },
 
   lastname: {
     type: Sequelize.STRING,
-    allowNull: false
+    allowNull: false,
   },
 
   // acting like 'username' and primary key
@@ -33,7 +33,7 @@ const modelDefinition = {
 
   password: {
     type: Sequelize.STRING,
-    allowNull: false
+    allowNull: false,
   },
 
   address: {

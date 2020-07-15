@@ -3,31 +3,39 @@ import {
   LOGOUT,
   REGISTER
 } from './types'
-
 export const login = params => (dispatch) => {
-  // const {
-  //   email,
-  //   password
-  // } = params.body
-  console.log("[DEBUG]: Login action")
-  console.log(params)
- // console.log(password)
-  fetch('http://localhost:4000/api/login', {
+  fetch(`http://localhost:4000/api/login`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify(params)
   })
-    .then((res) => {
-      console.log(res)
+  .then((res) => {
+    if (res.status === 200){
+      return res.json()
+    } else if (res.status === 404){
+      dispatch({type: LOGIN, status: 'fail'})
+    }
+  })
+    .then((data) => {
+      console.log('[DEBUG]: data')
+      console.log(data)
       dispatch({
-        type:LOGIN,
+        type: LOGIN,
         status: 'success',
-        payload: res.json()
+        payload: {...data, 'email': params.email}
+      })
+    
+    })
+    .catch((err) => {
+      dispatch({
+        type: LOGIN,
+        status: 'fail'
       })
     })
-    .catch((err) => console.log(err))
+  
+
 }
 
 export const logout = () => (dispatch) =>{
@@ -40,13 +48,6 @@ export const logout = () => (dispatch) =>{
 export const register = params => (dispatch) => {
   console.log("[DEBUG]: register") 
   console.log(params)
-  const {
-    firstname,
-    lastname,
-    email,
-    password,
-    address,
-  } = params
 
   fetch('http://localhost:4000/api/signup', {
     method: 'POST',
@@ -56,17 +57,10 @@ export const register = params => (dispatch) => {
     body: JSON.stringify(params)
   })
     .then((res) => {
-      let payload = {
-        firstname,
-        lastname,
-        email,
-        password,
-        address,
-      } 
+
       dispatch({
         type: REGISTER,
-        status: 'succcess',
-        payload: payload
+        status: 'succcess'
       })
     })
     .catch((err) => console.log(err))

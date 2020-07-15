@@ -11,3 +11,30 @@ export const createPaymentIntent = (resolve) => {
     })
     .catch((err) => console.log(err))
 }
+
+export const saveOrder = async (payload, resolve, reject) =>{
+  console.log('[DEBUG] saveOrder')
+  //console.log(payload)
+  fetch('http://localhost:4000/api/save-order', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(payload)
+  })
+  .then((res) => resolve(res.json()))
+  .catch((err) => reject('Something went wrong')) 
+}
+
+export const sendConfirmEmail = async(orderID) => {
+  console.log('[DEBUG]: sesndConfirmEmail')
+  fetch('http://localhost:4000/api/send-email-confirmation', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({orderID: orderID})
+  })
+  .then((res) => console.log(res.json()))
+  .catch((err) => console.log('Something went wrong')) 
+}

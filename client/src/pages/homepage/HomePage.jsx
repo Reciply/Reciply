@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
 
+import { connect } from 'react-redux'
+
 import HomePageModal  from '../../molecules/homepage-modal'
-import RegisterModal from '../../molecules/homepage-modal/RegisterModal'
 import Button from '../../elements/button'
-import ShopCart from '../../molecules/shop-cart'
+import { Redirect } from 'react-router-dom'
 
 import styles from './HomePage.css'
 
@@ -23,10 +24,13 @@ class HomePage extends Component{
     })
   }
 
-
-
   render(){    
     //TODO: Remember to do validation
+    const {
+      loggedIn    
+    } = this.props
+
+    if(loggedIn) return <Redirect to={'/products'}/>
 
     const { showLogin } = this.state
     return(
@@ -41,5 +45,11 @@ class HomePage extends Component{
     )
   }
 }
+const mapStateToProps = state => ({
+  loggedIn: state.users.isFetched
+})
 
-export default HomePage
+const mapDispatchToProps = {
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(HomePage)

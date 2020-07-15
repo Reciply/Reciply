@@ -16,7 +16,7 @@ const orderSaving = {};
  */
 orderSaving.saveOrder = function(req, res, next) {
   console.log('[DEBUG]: saveOrder');
-
+  console.log(req) 
   // first check if there are null in critical attributes
   if (!req.body.email || !req.body.address || !req.body.items) {
     console.log(new Error('the format of the order is invalid!'));
@@ -31,9 +31,12 @@ orderSaving.saveOrder = function(req, res, next) {
 
       console.log(newOrder);
       Order.create(newOrder).then(
-          ()=>{
+          (order)=>{
             console.log('Order is saved successfully!');
-            res.status(202).json('Order is saved in database successfully!');
+            res.status(202).json({
+              message: 'Order is saved in database successfully!',
+              orderId: order.id
+            });
             next();
           },
           (error) => {

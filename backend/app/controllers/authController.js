@@ -1,77 +1,98 @@
-'use strict';
+"use strict";
 
-const jwt = require('jsonwebtoken');
+var jwt = require("jsonwebtoken");
 
-const config = require('../config');
-const db = require('../services/database');// a sequelize instance
-const User = require('../models/user');
+var config = require("../config");
+var db = require("../services/database"); // a sequelize instance
+var User = require("../models/user");
 
 const AuthController = {};
 
 // implement the 'register a user' logic
-AuthController.signUp = function(req, res) {
-  console.log('[DEBUG]: register');
-  // eslint-disable-next-line max-len
-  if (!req.body.firstname || !req.body.lastname || !req.body.email || !req.body.password || !req.body.address) {
-    res.json({message: 'Please provide complete information before submit.'});
+AuthController.signUp = function (req, res) {
+  console.log("[DEBUG]: register");
+  if (
+    !req.body.firstname ||
+    !req.body.lastname ||
+    !req.body.email ||
+    !req.body.password ||
+    !req.body.address
+  ) {
+    res
+      .status(200)
+      .json({ message: "Please provide complete information before submit." });
   } else {
-    db.sync({alter: true}).then(function() { // newly added
-      const newUser = {
+    db.sync().then(function () {
+      var newUser = {
         firstname: req.body.firstname,
         lastname: req.body.lastname,
         email: req.body.email,
         password: req.body.password,
-        address: req.body.address
+        address: req.body.address,
       };
 
       User.create(newUser).then(
-          ()=>{
-            res.status(201).json({message: 'Account created!'});
-          },
-          (error) => {
-            console.log(error);
-            res.status(403).json({message: 'Email already exists!'});
-          }
+        () => {
+          res.status(201).json({ message: "Account created!" });
+        },
+        (error) => {
+          console.log(error);
+          res.status(403).json({ message: "Email already exists!" });
+        }
       );
     });
   }
 };
 
-
 // implement the 'user login' logic
-AuthController.authenticateUser = function(req, res) {
-  console.log('[DEBUG]: authenticateUser');
+AuthController.authenticateUser = function (req, res) {
+  console.log("[DEBUG]: authenticateUser");
   if (!req.body.email || !req.body.password) {
-    res.status(404).json({message: 'Email and password are needed!'});
+    res.status(404).json({ message: "Email and password are needed!" });
   } else {
-    const email = req.body.email;
-    const password = req.body.password;
+    var email = req.body.email,
+      password = req.body.password;
 
-    User.findOne({where: {email: email}}).then(function(user) {
-      if (!user) {
-        res.status(404).json({message: 'Authentication failed! User does not exist!'});
-      } else {
-        user.comparePasswords(password, (error, result)=>{
-          if (error) {
-            res.status(500).json({message: 'An error happened casusing login failure!'});
-          } else if (!result) {
-            res.status(401).json({message: 'Authentication failed! Password is incorrect!'});
-          } else {
-            // the generated token is a string
-            const token = jwt.sign(
-                {email: user.email}, // this line is the payload
+    User.findOne({ where: { email: email } })
+      .then(function (user) {
+        if (!user) {
+          res
+            .status(404)
+            .json({ message: "Authentication failed! User does not exist!" });
+        } else {
+          user.comparePasswords(password, (error, result) => {
+            if (error) {
+              res
+                .status(500)
+                .json({ message: "An error happened casusing login failure!" });
+            } else if (!result) {
+              res
+                .status(401)
+                .json({
+                  message: "Authentication failed! Password is incorrect!",
+                });
+            } else {
+              // the generated token is a string
+              var token = jwt.sign(
+                { email: user.email }, // this line is the payload
                 config.keys.secret,
-                {expiresIn: '30m'}
-            );
-            res.json({success: true, token: 'JWT' + token});
-          }
-        });
-      }
-    }).catch((error)=>{
-      res.status(500).json({message: 'There is an error!'});
-    });
+                { expiresIn: "30m" }
+              );
+              res.json({
+                success: true,
+                firstname: user.firstname,
+                lastname: user.lastname,
+                address: user.address,
+                token: "JWT" + token,
+              });
+            }
+          });
+        }
+      })
+      .catch((error) => {
+        res.status(500).json({ message: "There is an error!" });
+      });
   }
 };
-
 
 module.exports = AuthController;

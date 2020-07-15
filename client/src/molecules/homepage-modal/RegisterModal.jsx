@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 import {
   register
 } from '../../state/ducks/users/actions'
-
 import TextField from '../../elements/textfield'
 import Button from '../../elements/button'
 
@@ -36,8 +35,7 @@ class RegisterModal extends Component{
 
   handlePostCodeCheck = () => {
     const { postCode } = this.state
-
-    this.setState({showRegister: true})
+    if (postCode === '2222') this.setState({showRegister: true})
     // const promise = new Promise((resolve, reject) => {
     //   checkPostCode(postCode, resolve, reject)
     // })
@@ -68,10 +66,10 @@ class RegisterModal extends Component{
     console.log("[DEBUG]: Handle register")
     const body = {
       'firstname': regFirstName,
-      'regLastName': regLastName,
-      'regEmail': regEmail,
-      'regPwd': regPwd, 
-      'regAddress': regAddress
+      'lastname': regLastName,
+      'email': regEmail,
+      'password': regPwd, 
+      'address': regAddress
     }
     registerConnect(body)
 
@@ -89,7 +87,7 @@ class RegisterModal extends Component{
       regPwd,
       regCnfrmPwd,
       regAddress
-    } = this.state  
+    } = this.state
     if(showRegister) {
       return(
         <div className = {styles.modal}>
@@ -117,12 +115,14 @@ class RegisterModal extends Component{
             <TextField
               className={styles.regPwd}
               placeholder="Password"
+              type="password"
               value={regPwd}
               onChange={value => this.handleChange('regPwd', value)}
             />
             <TextField
               className={styles.regCnfrmPwd}
               placeholder="Password"
+              type="password"
               value={regCnfrmPwd}
               onChange={value => this.handleChange('regCnfrmPwd', value)}
             />
@@ -169,7 +169,6 @@ class RegisterModal extends Component{
 }
 
 const mapStateToProps = state => ({
-
 })
 
 const mapDispatchToProps = {

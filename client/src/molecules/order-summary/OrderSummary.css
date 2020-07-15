@@ -1,0 +1,46 @@
+.orderSummary{
+    padding: 1rem 2rem;
+    width: 16.375rem;
+    background-color: var(--w100);
+    box-shadow: 3px 3px 7px -1px #000000;
+    margin: 5rem;
+    float: left;
+}
+
+.shopList{
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.shopListItem{
+  display: flex;
+  flex-flow: row no-wrap;
+  margin-bottom: 1rem;
+  position: relative;
+}
+
+.shopListItem > p{
+  text-align: left;
+  margin: 0;
+}
+
+.shopListItem > .amount{
+  flex: 3;
+}
+
+.shopListItem > .name{
+  flex: 4;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.shopListItem > .price{
+    flex: 3;
+}
+
+p{
+  margin: 0;
+  text-align: left;
+}

@@ -3,6 +3,8 @@ import { connect } from 'react-redux'
 import {
   login
 } from '../../state/ducks/users/actions'
+
+import { Redirect } from 'react-router-dom'
 import Button from '../../elements/button'
 import TextField from '../../elements/textfield'
 
@@ -24,6 +26,8 @@ class LoginModal extends Component{
     })
   }
 
+
+
   handleLogin = () => {
     console.log("[DEBUG]: handleLogin")
     const { 
@@ -38,13 +42,12 @@ class LoginModal extends Component{
     //TODO: Validate login details
 
     //create an object called body with email and passwords
-    const body = {
+    const values = {
       'email': loginEmail,
       'password': loginPassword
     }
 
-    //Login requests
-    loginConnect(body)
+    loginConnect(values)
   }
 
   render(){
@@ -52,6 +55,14 @@ class LoginModal extends Component{
       loginEmail,
       loginPassword
     } = this.state
+
+    const {
+      loggedIn 
+    } = this.props
+    
+    if (loggedIn) {
+      return <Redirect to={'/products'} />
+    }
     return(
       <div className={styles.modal}>
         <form className={styles.loginForm}>
@@ -77,7 +88,7 @@ class LoginModal extends Component{
 }
 
 const mapStateToProps = state => ({
-
+  loggedIn: state.users.isFetched,
 })
 
 const mapDispatchToProps = {
