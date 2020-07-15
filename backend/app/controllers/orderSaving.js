@@ -31,9 +31,12 @@ orderSaving.saveOrder = function(req, res, next) {
 
       console.log(newOrder);
       Order.create(newOrder).then(
-          ()=>{
+          (order)=>{
             console.log('Order is saved successfully!');
-            res.status(202).json('Order is saved in database successfully!');
+            res.status(202).json({
+              message: 'Order is saved in database successfully!',
+              orderId: order.id
+            });
             next();
           },
           (error) => {
