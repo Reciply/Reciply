@@ -1,33 +1,34 @@
-const stripe = require("stripe")('sk_test_o0bGBiHFKdDeg6ZsiqqDXKK000PNnFMZkk'); //FIXME: put in process env
+const stripe = require('stripe')('sk_test_o0bGBiHFKdDeg6ZsiqqDXKK000PNnFMZkk'); // FIXME: put in process env
 
-var OrderController = {};
+const OrderController = {};
 // Helper function for calculating items
 const calculateOrderAmount = (items) => {
   // TODO: Replace this constant with a calculation of the order's amount
-  console.log(items)
-  total = 0 
-  for (item = 0; item < items.length; item++) { 
-    total += parseFloat(items[item].productPrice) * parseFloat(items[item].amount)
+  console.log(items);
+  total = 0;
+  for (item = 0; item < items.length; item++) {
+    // eslint-disable-next-line max-len
+    total += parseFloat(items[item].productPrice) * parseFloat(items[item].amount);
   }
-  return total * 100;//convert to cents because stripe only uses cents
+  return total * 100;// convert to cents because stripe only uses cents
 };
 
 // POST
 OrderController.createPaymentIntent = async (req, res) => {
-  console.log("[DEBUG]: create payment intent has been called");
-//  console.log(req.body)
+  console.log('[DEBUG]: create payment intent has been called');
+  //  console.log(req.body)
   const {
     cart
-  } = req.body
+  } = req.body;
 
   // Create a PaymentIntent with the order amount and currency
   const paymentIntent = await stripe.paymentIntents.create({
     amount: calculateOrderAmount(cart),
-    currency: "aud",
-    metadata: { integration_check: "accept_a_payment" },
+    currency: 'aud',
+    metadata: {integration_check: 'accept_a_payment'}
   }).catch((err) => err);
 
-  console.log(paymentIntent)
+  console.log(paymentIntent);
 
   // // Send publishable key and PaymentIntent details to client
   res.send({
@@ -42,7 +43,7 @@ OrderController.pay = async (req, res) => {
     paymentIntentId,
     items,
     currency,
-    useStripeSdk,
+    useStripeSdk
   } = req.body;
 
   const orderAmount = calculateOrderAmount(items);
@@ -55,11 +56,11 @@ OrderController.pay = async (req, res) => {
         amount: orderAmount,
         currency: currency,
         payment_method: paymentMethodId,
-        confirmation_method: "manual",
+        confirmation_method: 'manual',
         confirm: true,
         // If a mobile client passes `useStripeSdk`, set `use_stripe_sdk=true`
         // to take advantage of new authentication features in mobile SDKs
-        use_stripe_sdk: useStripeSdk,
+        use_stripe_sdk: useStripeSdk
       });
       // TODO: After create, if the PaymentIntent's status is succeeded, fulfill the order.
       console.log(intent);
@@ -73,7 +74,7 @@ OrderController.pay = async (req, res) => {
     res.send(generateResponse(intent));
   } catch (e) {
     // TODO: Handle "hard declines" https://stripe.com/docs/declines/codes
-    res.send({ error: e.message });
+    res.send({error: e.message});
   }
 };
 
@@ -85,19 +86,19 @@ const generateResponse = (intent) => {
       // Card requires authentication
       return {
         requiresAction: true,
-        clientSecret: intent.client_secret,
+        clientSecret: intent.client_secret
       };
     case 'requires_payment_method':
     case 'requires_source':
       // Card was not properly authenticated, suggest a new payment method
       return {
-        error: "Your card was denied, please provide a new payment method",
+        error: 'Your card was denied, please provide a new payment method'
       };
     case 'succeeded':
       // Payment is complete, authentication not required
       // To cancel the payment after capture you will need to issue a Refund (https://stripe.com/docs/api/refunds)
-      console.log("💰 Payment received!");
-      return { clientSecret: intent.client_secret };
+      console.log('💰 Payment received!');
+      return {clientSecret: intent.client_secret};
   }
 };
 

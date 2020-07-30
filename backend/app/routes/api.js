@@ -20,10 +20,10 @@ const sendNotificationEmail = require('../services/sendEmails/sendNotificationEm
 const APIRoutes = function(passport) {
   // ============ User Endpoints ============ //
   // create a singup endpoint
-  router.post("/signup", AuthController.signUp);
+  router.post('/signup', AuthController.signUp);
 
   // create an login endpoint
-  router.post("/login", AuthController.authenticateUser);
+  router.post('/login', AuthController.authenticateUser);
 
   // test to access resouce with assigned JWT
   router.post('/profile', passport.authenticate('jwt', {session: false}), function(req, res) {

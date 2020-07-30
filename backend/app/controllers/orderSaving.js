@@ -16,7 +16,7 @@ const orderSaving = {};
  */
 orderSaving.saveOrder = function(req, res, next) {
   console.log('[DEBUG]: saveOrder');
-  console.log(req) 
+  console.log(req);
   // first check if there are null in critical attributes
   if (!req.body.email || !req.body.address || !req.body.items) {
     console.log(new Error('the format of the order is invalid!'));
