@@ -6,13 +6,13 @@
 var config = module.exports;
 
 config.db = {
-  user: "admin",
-  password: "reciply",
-  db_name: "reciply_db",
+  user: 'admin',
+  password: 'reciplydb',
+  db_name: 'reciply_db'
 };
 
 config.db.details = {
-  host: "localhost",
+  host: 'reciply-db-instance-1.cwaycgg32fcr.ap-southeast-2.rds.amazonaws.com',
   port: 3306,
   dialect: "mysql",
 };

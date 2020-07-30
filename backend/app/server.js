@@ -43,7 +43,7 @@ app.get("*", function (req, res) {
   res.send({ message: "invalid route" });
 });
 
-const port = process.env.PORT || 4000;
+const port = process.env.PORT || 3000;
 app.listen(port, () => {
   console.log("app is listening on port " + port + "!");
 });
