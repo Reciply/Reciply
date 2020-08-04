@@ -8,8 +8,7 @@ sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
 router.post('/sendList', (req, res) => {
   const {
-    grocery,
-    total
+    grocery
   } = req.body;
   console.log(grocery);
 
