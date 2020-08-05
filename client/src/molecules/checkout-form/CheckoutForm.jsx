@@ -23,9 +23,9 @@ class CheckoutForm extends React.Component {
   constructor(props){
     super(props)
     this.state = {
-      deliveryAddress: '56 Chapel Street',
-      deliveryInstructions: 'Knock the door and leave it at the door thanks',
-      mobileNumber: '0490754907',
+      deliveryAddress: '',
+      deliveryInstructions: '',
+      mobileNumber: '',
       success: false
     }
   }
@@ -161,11 +161,12 @@ class CheckoutForm extends React.Component {
           />
         </div>
         <div>
-          <h3><Truck /> Delivery Instructions</h3>
+          <h3><Truck /> When would you like your groceries delivered? </h3>
+          <p>We can deliver in the next hour or 8AM to 10PM 7 days a week.</p>
           <TextField  
             name="deliveryInstructions"
             type="text"
-            placeholder="Instructions"
+            placeholder="Date and time you'd like to receive your groceries"
             value={deliveryInstructions}
             onChange={value => this.handleChange('deliveryInstructions', value)}
           /> 
@@ -176,7 +177,7 @@ class CheckoutForm extends React.Component {
           <TextField
             name="mobileNumber"
             type="text"
-            placeholder="Mobile Numbers"
+            placeholder="Mobile Number"
             value={mobileNumber}
             onChange={value => this.handleChange('mobileNumber', value)}        
           />
