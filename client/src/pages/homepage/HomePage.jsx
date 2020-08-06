@@ -29,6 +29,8 @@ class HomePage extends Component{
     const {
       loggedIn    
     } = this.props
+    console.log('[DEBUG]: Render')
+    console.log(process.env.DEV_API_BASE_URL)
 
     if(loggedIn) return <Redirect to={'/products'}/>
 

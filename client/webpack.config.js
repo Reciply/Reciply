@@ -59,6 +59,12 @@ const config = {
   devServer: {
     contentBase: './dist',
     historyApiFallback: true
+  },
+  externals: {
+    //global app configuration
+    config: JSON.stringify({
+      apiUrl: 'http://localhost:4000'
+    })
   }
 }
 

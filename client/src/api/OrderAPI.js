@@ -1,8 +1,9 @@
+import config from 'config'
 
 // This function is for creating a payment intent with the stripe API.
 export const createPaymentIntent = (resolve) => {
   console.log('[DEBUG]: createPaymentIntent has been called')
-  fetch('http://localhost:4000/orders/create-payment-intent', {
+  fetch(`${config.apiUrl}/orders/create-payment-intent`, {
     method: 'GET',
   })
     .then((res) => res.json())
@@ -15,7 +16,7 @@ export const createPaymentIntent = (resolve) => {
 export const saveOrder = async (payload, resolve, reject) =>{
   console.log('[DEBUG] saveOrder')
   //console.log(payload)
-  fetch('http://localhost:4000/api/save-order', {
+  fetch(`${config.apiUrl}/api/save-order`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -28,7 +29,7 @@ export const saveOrder = async (payload, resolve, reject) =>{
 
 export const sendConfirmEmail = async(orderID) => {
   console.log('[DEBUG]: sesndConfirmEmail')
-  fetch('http://localhost:4000/api/send-email-confirmation', {
+  fetch(`${config.apiUrl}/api/send-email-confirmation`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'

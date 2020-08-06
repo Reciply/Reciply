@@ -16,6 +16,7 @@ import TextField from '../../elements/textfield'
 import Button from '../../elements/button'
 import { Redirect } from 'react-router-dom'
 import { saveOrder, sendConfirmEmail } from '../../api/OrderAPI'
+import config from 'config'
 
 import styles from './CheckoutForm.css'
 
@@ -71,7 +72,7 @@ class CheckoutForm extends React.Component {
     }
 
 
-    const paymentIntent = await fetch(`http://localhost:4000/api/create-payment-intent`, {
+    const paymentIntent = await fetch(`${config.apiUrl}/api/create-payment-intent`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

@@ -3,8 +3,10 @@ import {
   LOGOUT,
   REGISTER
 } from './types'
+import config from 'config'
+
 export const login = params => (dispatch) => {
-  fetch(`http://localhost:4000/api/login`, {
+  fetch(`${config.apiUrl}/api/login`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -49,7 +51,7 @@ export const register = params => (dispatch) => {
   console.log("[DEBUG]: register") 
   console.log(params)
 
-  fetch('http://localhost:4000/api/signup', {
+  fetch(`${config.apiUrl}/api/signup`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
