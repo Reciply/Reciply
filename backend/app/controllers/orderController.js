@@ -1,5 +1,5 @@
-const stripe = require('stripe')('sk_test_o0bGBiHFKdDeg6ZsiqqDXKK000PNnFMZkk'); // FIXME: put in process env
-
+const stripe = require('stripe')(process.env.STRIPE_API_KEY); // FIXME: put in process env
+console.log(process.env.STRIPE_API_KEY)
 const OrderController = {};
 // Helper function for calculating items
 const calculateOrderAmount = (items) => {

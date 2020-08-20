@@ -14,8 +14,8 @@ import styles from './OrderPage.css'
 
 // Make sure to call `loadStripe` outside of a component’s render to avoid
 // recreating the `Stripe` object on every render.
-const stripePromise = loadStripe('pk_test_bs9gcFqzGQn9v5FyDlPL3sVu00DK7P3kyz')
-
+const stripePromise = loadStripe('pk_test_d083NMnCD3SRnIK1frjB9kUE00AkmvidZ6')
+	
 class OrderPage extends Component {
 
   render () {
